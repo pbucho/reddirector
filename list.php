@@ -12,7 +12,7 @@
 	<body>
 		<div class="container">
 			<h1>Redirector URL list</h1>
-			<table class="table">
+			<table class="table table-hover">
 				<tr>
 					<th>Short URL</th>
 					<th>Long URL</th>
