@@ -3,7 +3,7 @@
 <html lang="en">
 	<!-- pbucho, 03-04-2016 -->
 	<head>
-		<title>Redirector URL list</title>
+		<title>Redirector access log</title>
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
@@ -12,25 +12,24 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1>Redirector URL list</h1>
-			<p>Short URLs to be used in the format <code>r.bucho.pt/string</code></p>
+			<h1>Redirector access log</h1>
 			<hr/>
-			<a href="/log">
-				<button class="btn btn-primary">See log</button>
+			<a href="/list">
+				<button class="btn btn-primary">See list</button>
 			</a>
 			<hr/>
 			<table class="table table-hover" id="link_table">
 				<thead>
 					<tr>
-						<th>String</th>
-						<th>Long URL</th>
-						<th>Date added</th>
-						<th>Views</th>
+						<th>Access date</th>
+						<th>Requested string</th>
+						<th>IP address</th>
+						<th>Success</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						$sql = "SELECT * FROM translation";
+						$sql = "SELECT * FROM requests";
 						$conn = getConnection();
 						$result = $conn->query($sql);
 						$conn = null;
@@ -39,10 +38,10 @@
 						
 						foreach($result as $item){
 							echo "<tr>";
-							echo "<td>".$item['short_url']."</td>";
-							echo "<td><a href='".$item['long_url']."' target='_blank'>".$item['long_url']."</a></td>";
-							echo "<td>".$item['added']."</td>";
-							echo "<td>".$item['views']."</td>";
+							echo "<td>".$item['date']."</td>";
+							echo "<td>".$item['request']."</td>";
+							echo "<td>".$item['ip']."</td>";
+							echo "<td>".binaryToEnglish($item['ok'])."</td>";
 							echo "</tr>";
 						}
 					?>
@@ -61,7 +60,7 @@
 				$(document).ready(function() {
 					$("#link_table").dataTable( {
 						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-						"order": [[ 2, "desc" ]]
+						"order": [[ 0, "desc" ]]
 					});
 				});
 			</script>
