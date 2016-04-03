@@ -54,7 +54,10 @@
 	
 			<script type="text/javascript">
 				$(document).ready(function() {
-					$("#link_table").DataTable();
+					$("#link_table").dataTable( {
+						"pageLength": 20,
+						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
+					});
 				});
 			</script>
 		</div>
