@@ -12,6 +12,7 @@
 	<body>
 		<div class="container">
 			<h1>Redirector URL list</h1>
+			<p>Short URLs to be used in the format <code>r.bucho.pt/shorturl</code></p>
 			<table class="table table-hover">
 				<tr>
 					<th>Short URL</th>
@@ -30,7 +31,7 @@
 					foreach($result as $item){
 						echo "<tr>";
 						echo "<td>".$item['short_url']."</td>";
-						echo "<td><a href='".$item['long_url']."'>".$item['long_url']."</a></td>";
+						echo "<td><a href='".$item['long_url']."' target='_blank'>".$item['long_url']."</a></td>";
 						echo "<td>".$item['added']."</td>";
 						echo "<td>".$item['views']."</td>";
 						echo "</tr>";
