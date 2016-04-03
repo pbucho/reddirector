@@ -56,7 +56,8 @@
 				$(document).ready(function() {
 					$("#link_table").dataTable( {
 						"pageLength": 20,
-						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]]
+						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+						"order": [[ 2, "desc" ]]
 					});
 				});
 			</script>
