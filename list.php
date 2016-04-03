@@ -4,6 +4,7 @@
 	<!-- pbucho, 03-04-2016 -->
 	<head>
 		<title>Redirector URL list</title>
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<!-- BOOTSTRAP -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
