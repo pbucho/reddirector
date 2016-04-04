@@ -38,5 +38,27 @@
 		}
 		return "False";
 	}
+	
+	function get404Image() {
+		$sqlMaxImg = "SELECT max(id) AS max FROM 404errors";
+		
+		$conn = getConnection();
+		$result = $conn->query($sqlMaxImg);
+		
+		$rand = rand(1, fetchLazy($result)['max']);
+		
+		$sqlGetImg = "SELECT url FROM 404errors WHERE id = $rand";
+		$sqlUpdViews = "UPDATE 404errors SET views = views + 1 WHERE id = $rand";
+		
+		$result = $conn->query($sqlGetImg);
+		$conn->query($sqlUpdViews);
+		$conn = null;
+		
+		return fetchLazy($result)['url'];
+	}
+	
+	function fetchLazy($result){
+		return $result->fetch(PDO::FETCH_LAZY);
+	}
 
 ?>
