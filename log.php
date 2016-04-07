@@ -29,18 +29,20 @@
 				</thead>
 				<tbody>
 					<?php
+						global $EXT_IP_CHECK;
 						$sql = "SELECT * FROM requests";
 						$conn = getConnection();
 						$result = $conn->query($sql);
 						$conn = null;
-						
+
 						$result = $result->fetchAll();
-						
+
 						foreach($result as $item){
 							echo "<tr>";
 							echo "<td>".$item['date']."</td>";
 							echo "<td>".$item['request']."</td>";
-							echo "<td>".$item['ip']."</td>";
+							$ip = $item['ip'];
+							echo "<td><a href='".$EXT_IP_CHECK."=$ip' target='_blank'>$ip</td>";
 							echo "<td>".binaryToEnglish($item['ok'])."</td>";
 							echo "</tr>";
 						}
@@ -55,7 +57,7 @@
 			</script>
 			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
 			</script>
-	
+
 			<script type="text/javascript">
 				$(document).ready(function() {
 					$("#link_table").dataTable( {
