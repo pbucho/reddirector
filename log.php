@@ -42,7 +42,7 @@
 							echo "<td>".$item['date']."</td>";
 							echo "<td>".$item['request']."</td>";
 							$ip = $item['ip'];
-							echo "<td><a href='".$EXT_IP_CHECK."=$ip' target='_blank'>$ip</td>";
+							echo "<td><a href='".$EXT_IP_CHECK."=$ip' target='_blank'>$ip</a></td>";
 							echo "<td>".binaryToEnglish($item['ok'])."</td>";
 							echo "</tr>";
 						}
