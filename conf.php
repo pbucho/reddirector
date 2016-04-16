@@ -84,4 +84,8 @@
 		setcookie($name, $value, $exp);
 	}
 	
+	function getCurrentYear(){
+		return date("Y");
+	}
+
 ?>
