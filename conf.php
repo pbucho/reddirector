@@ -62,5 +62,9 @@
 	function fetchLazy($result){
 		return $result->fetch(PDO::FETCH_LAZY);
 	}
+	
+	function getCurrentYear(){
+		return date("Y");
+	}
 
 ?>

@@ -2,5 +2,8 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/list.php$
+RewriteCond %{REQUEST_URI} !^/log.php$
+RewriteCond %{REQUEST_URI} !^/login.php$
+RewriteCond %{REQUEST_URI} !^/add.php$
+RewriteCond %{REQUEST_URI} !^/backwards.css$
 RewriteRule ^(.*)$ /index.php?short=$1 [NC,L,QSA]
-

@@ -1,7 +1,7 @@
 <?php include_once("conf.php"); ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 03-04-2016 -->
+	<!-- pbucho, 16-04-2016 -->
 	<head>
 		<title>Redirector access log</title>
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -49,6 +49,7 @@
 					?>
 				</tbody>
 			</table>
+			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo getCurrentYear(); ?></p>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
 			</script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
