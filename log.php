@@ -14,7 +14,7 @@
 		<div class="container">
 			<h1>Redirector access log</h1>
 			<hr/>
-			<a href="/list">
+			<a href="list.php">
 				<button class="btn btn-primary">See list</button>
 			</a>
 			<hr/>

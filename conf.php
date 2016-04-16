@@ -4,7 +4,9 @@
 
 	$DEFAULT = "http://bucho.pt";
 	$NOREDIR = array("list","log","login","add");
-
+	$LOGIN = "login.php";
+	$LOGIN_EXPIRY_S = 7200;
+	
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 
 	ini_set('display_errors', 1);
@@ -62,5 +64,24 @@
 	function fetchLazy($result){
 		return $result->fetch(PDO::FETCH_LAZY);
 	}
-
+	
+	function createOrUpdateCookieExp($name, $value){
+		$exp = time() + (7200); // 2hrs
+		createOrUpdateCookie($name, $value, $exp);
+	}
+	
+	function createOrUpdateCookieNoExp($name, $value){
+		$exp = time() + (62208000); // 2yrs
+		createOrUpdateCookie($name, $value, $exp);
+	}
+	
+	function deleteCookie($name){
+		$exp = time() - 10;
+		createOrUpdateCookie($name, "", $exp);
+	}
+	
+	function createOrUpdateCookie($name, $value, $exp){
+		setcookie($name, $value, $exp);
+	}
+	
 ?>

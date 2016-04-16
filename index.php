@@ -11,7 +11,7 @@
 	$sqlUpd = "UPDATE translation SET views = views + 1 WHERE short_url = '$short_url'";
 	
 	if(isNoRedir($short_url)){
-		header("Location: /".$short_url.".php");
+		header("Location: ".$short_url.".php");
 		die;
 	}
 	

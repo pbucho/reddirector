@@ -15,8 +15,12 @@
 			<h1>Redirector URL list</h1>
 			<p>Short URLs to be used in the format <code>r.bucho.pt/string</code></p>
 			<hr/>
-			<a href="/log">
+			<a href="log.php">
 				<button class="btn btn-primary">See log</button>
+			</a>
+			&nbsp;
+			<a href="add.php">
+				<button class="btn btn-default">Add URL</button>
 			</a>
 			<hr/>
 			<table class="table table-hover" id="link_table">
