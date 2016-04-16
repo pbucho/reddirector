@@ -37,7 +37,7 @@ CREATE UNIQUE INDEX username_idx USING HASH ON `redirect`.`users`(name);
 
 CREATE TABLE `redirect`.`tokens` (
 	id int NOT NULL,
-	value varchar(255) NOT ,
+	value varchar(255) NOT NULL,
 	owner int NOT NULL,
 	added timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	expiry datetime,
@@ -47,4 +47,3 @@ CREATE TABLE `redirect`.`tokens` (
 );
 
 CREATE UNIQUE INDEX token_idx USING HASH ON `redirect`.`tokens`(value);
-
