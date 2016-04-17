@@ -57,6 +57,7 @@
 		<![endif]-->
 	</head>
 	<body>
+		<?php include("./resources/top_menu.php"); ?>
 		<div class="container">
 			<form class="form-signin" action="login.php" method="post">
 				<h2>Redirector login</h2>
@@ -64,6 +65,10 @@
 					if($login_failed){
 						echo "<div class='alert alert-danger'>";
 						echo "Login failed. Try again.";
+						echo "</div>";
+					}else if(isset($_GET['logout']) && strcmp($_GET['logout'], "1") == 0){
+						echo "<div class='alert alert-success'>";
+						echo "You have been logged out.";
 						echo "</div>";
 					}
 				?>
