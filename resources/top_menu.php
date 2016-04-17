@@ -7,13 +7,13 @@
     <ul class="nav navbar-nav">
       <li><a href="../list.php">List</a></li>
       <li><a href="../log.php">Log</a></li>
-      <li><a href="../backend/add.php">Add</a></li>
+      <li><a href="../backend/add.php">Add URL</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <?php
         $session = has_session();
         if($session == false){
-          echo "<li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
+          echo "<li><a href='/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
         }else{
           echo "<li><a>".$session['user']."</a></li>";
           echo "<li><a href='/logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";

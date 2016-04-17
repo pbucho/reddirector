@@ -4,7 +4,7 @@
 	<!-- pbucho, 16-04-2016 -->
 	<head>
 		<title>Redirector access log</title>
-		<link rel="stylesheet" href="resources/backwards.css">
+		<link rel="stylesheet" href="/resources/backwards.css">
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"

@@ -6,8 +6,7 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
-	$DEFAULT = "list.php";
-	$NOREDIR = array("list","log","login","add");
+	$DEFAULT = "/login.php";
 	$LOGIN_EXPIRY_S = 7200;
 
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
@@ -22,17 +21,6 @@
 		$conn = new PDO("mysql:host=$server;dbname=$database", $username, $password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		return $conn;
-	}
-
-	function isNoRedir($string) {
-		global $NOREDIR;
-
-		foreach($NOREDIR as $word){
-			if(strcmp($string, $word) === 0){
-				return true;
-			}
-		}
-		return false;
 	}
 
 	function binaryToEnglish($value) {

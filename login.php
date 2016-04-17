@@ -10,7 +10,7 @@
 		$validToken = validate_token($token);
 
 		if($validToken){
-			header("Location: ./backend/add.php");
+			header("Location: /backend/add.php");
 		}
 	}
 
@@ -34,7 +34,7 @@
 			create_or_update_cookie("user", $cuser, $token_array['expiry']);
 			create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
 
-			header("Location: ./backend/add.php");
+			header("Location: /backend/add.php");
 		}
 	}
 ?>
@@ -43,7 +43,7 @@
 	<!-- pbucho, 17-04-2016 -->
 	<head>
 		<title>Redirector login</title>
-		<link rel="stylesheet" href="resources/backwards.css">
+		<link rel="stylesheet" href="/resources/backwards.css">
 		<link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		<link href="https://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		<![endif]-->
 	</head>
 	<body>
-		<?php include("./resources/top_menu.php"); ?>
+		<?php include("resources/top_menu.php"); ?>
 		<div class="container">
 			<form class="form-signin" action="login.php" method="post">
 				<h2>Redirector login</h2>

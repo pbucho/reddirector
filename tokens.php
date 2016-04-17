@@ -1,5 +1,4 @@
 <?php
-
 	include_once("conf.php");
 
 	$TOKEN_DURATION = 15552000; // 6 months in seconds
