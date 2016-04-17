@@ -3,13 +3,14 @@
 	include_once("tokens.php");
 
 	$login_failed = false;
+	$cookie_info = has_session();
 
-	if(has_session() != false){
-		$token = $_COOKIE['token'];
+	if($cookie_info != false){
+		$token = $cookie_info['token'];
 		$validToken = validate_token($token);
 
 		if($validToken){
-			header("Location: backend/add.php");
+			header("Location: ./backend/add.php");
 		}
 	}
 
@@ -33,7 +34,7 @@
 			create_or_update_cookie("user", $cuser, $token_array['expiry']);
 			create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
 
-			header("Location: backend/add.php");
+			header("Location: ./backend/add.php");
 		}
 	}
 ?>

@@ -88,7 +88,7 @@
 
 	function has_session(){
 		if(isset($_COOKIE['user']) && isset($_COOKIE['token'])){
-			return $_COOKIE['user'];
+			return array('user' => $_COOKIE['user'], 'token' => $_COOKIE['token']);
 		}else{
 			return false;
 		}

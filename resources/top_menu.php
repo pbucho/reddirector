@@ -15,7 +15,7 @@
         if($session == false){
           echo "<li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a></li>";
         }else{
-          echo "<li>$session</li>";
+          echo "<li>".$session['user']."</li>";
           echo "<li><a href='#'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
         }
       ?>

@@ -30,8 +30,6 @@
 		}else{
 			return false;
 		}
-
-		// TODO finish
 	}
 
 	function generate_token($user){
@@ -57,12 +55,24 @@
 		$result = $conn->query($sqlTok);
 		$conn = null;
 
-		//return $token;
 		return array('token' => $token, 'expiry' => $expiry);
 	}
 
 	function revoke_token($token){
-		// TODO
+		$sqlRev = "UPDATE tokens SET revoked = '1' WHERE value = '$token'";
+		$conn = getConnection();
+		$conn->query($sqlRev);
+		$conn = null;
+	}
+
+	function revoke_all_user_tokens($user){
+		$sqlUsr = "SELECT id FROM users WHERE name = '$user'";
+		$conn = getConnection();
+		$result = $conn->query($sqlUsr);
+		$userid = fetchLazy($result)['id'];
+		$sqlRev = "UPDATE tokens SET revoked = '1' WHERE owner = '$userid'";
+		$conn->query($sqlRev);
+		$conn = null;
 	}
 
 ?>
