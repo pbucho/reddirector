@@ -2,11 +2,14 @@
 
 	include_once("secrets.php");
 
-	$DEFAULT = "http://bucho.pt";
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+
+	$DEFAULT = "list.php";
 	$NOREDIR = array("list","log","login","add");
-	$LOGIN = "login.php";
 	$LOGIN_EXPIRY_S = 7200;
-	
+
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 
 	ini_set('display_errors', 1);
@@ -43,7 +46,7 @@
 		return "False";
 	}
 
-	function get404Image() {
+	function get_404_image() {
 		$sqlMaxImg = "SELECT max(id) AS max FROM 404errors";
 
 		$conn = getConnection();
@@ -64,28 +67,31 @@
 	function fetchLazy($result){
 		return $result->fetch(PDO::FETCH_LAZY);
 	}
-	
-	function createOrUpdateCookieExp($name, $value){
-		$exp = time() + (7200); // 2hrs
-		createOrUpdateCookie($name, $value, $exp);
-	}
-	
-	function createOrUpdateCookieNoExp($name, $value){
+
+	function create_or_update_cookie_no_exp($name, $value){
 		$exp = time() + (62208000); // 2yrs
-		createOrUpdateCookie($name, $value, $exp);
+		create_or_update_cookie($name, $value, $exp);
 	}
-	
-	function deleteCookie($name){
+
+	function delete_cookie($name){
 		$exp = time() - 10;
-		createOrUpdateCookie($name, "", $exp);
+		create_or_update_cookie($name, "", $exp);
 	}
-	
-	function createOrUpdateCookie($name, $value, $exp){
+
+	function create_or_update_cookie($name, $value, $exp){
 		setcookie($name, $value, $exp);
 	}
-	
-	function getCurrentYear(){
+
+	function get_current_year(){
 		return date("Y");
+	}
+
+	function has_session(){
+		if(isset($_COOKIE['user']) && isset($_COOKIE['token'])){
+			return $_COOKIE['user'];
+		}else{
+			return false;
+		}
 	}
 
 ?>

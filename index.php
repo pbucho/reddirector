@@ -27,7 +27,7 @@
 		$sqlReq .= "'0')";
 		$conn->query($sqlReq);
 		$conn = null;
-		$image404 = get404Image();
+		$image404 = get_404_image();
 		header("Location: $image404");
 		die;
 	}

@@ -4,7 +4,7 @@
 	<!-- pbucho, 16-04-2016 -->
 	<head>
 		<title>Redirector URL list</title>
-		<link rel="stylesheet" href="backwards.css">
+		<link rel="stylesheet" href="resources/backwards.css">
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
@@ -12,17 +12,10 @@
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
 	</head>
 	<body>
+		<?php include("resources/top_menu.php"); ?>
 		<div class="container">
 			<h1>Redirector URL list</h1>
 			<p>Short URLs to be used in the format <code>r.bucho.pt/string</code></p>
-			<hr/>
-			<a href="log.php">
-				<button class="btn btn-primary">See log</button>
-			</a>
-			&nbsp;
-			<a href="add.php">
-				<button class="btn btn-default">Add URL</button>
-			</a>
 			<hr/>
 			<table class="table table-hover" id="link_table">
 				<thead>
@@ -39,9 +32,9 @@
 						$conn = getConnection();
 						$result = $conn->query($sql);
 						$conn = null;
-						
+
 						$result = $result->fetchAll();
-						
+
 						foreach($result as $item){
 							echo "<tr>";
 							echo "<td>".$item['short_url']."</td>";
@@ -53,7 +46,7 @@
 					?>
 				</tbody>
 			</table>
-			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo getCurrentYear(); ?></p>
+			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
 			</script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
@@ -62,7 +55,7 @@
 			</script>
 			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
 			</script>
-	
+
 			<script type="text/javascript">
 				$(document).ready(function() {
 					$("#link_table").dataTable( {

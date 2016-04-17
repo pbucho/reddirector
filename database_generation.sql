@@ -36,14 +36,11 @@ CREATE TABLE `redirect`.`users` (
 CREATE UNIQUE INDEX username_idx USING HASH ON `redirect`.`users`(name);
 
 CREATE TABLE `redirect`.`tokens` (
-	id int NOT NULL,
 	value varchar(255) NOT NULL,
 	owner int NOT NULL,
 	added timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	expiry datetime,
 	revoked tinyint(1) NOT NULL DEFAULT 0,
-	PRIMARY KEY(id),
+	PRIMARY KEY(value),
 	FOREIGN KEY(owner) REFERENCES `redirect`.`users`(id)
 );
-
-CREATE UNIQUE INDEX token_idx USING HASH ON `redirect`.`tokens`(value);
