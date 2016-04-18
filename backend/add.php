@@ -2,6 +2,8 @@
 	include_once("../conf.php");
 	include_once("../tokens.php");
 
+	global $SHORT_BASE;
+
 	$cookie_info = has_session();
 
 	if($cookie_info == false){
@@ -16,10 +18,34 @@
 		header("Location: /login.php");
 	}
 
+	$operation_failed = false;
+	$shortened = false;
+	$reason = null;
+
+	if(isset($_POST['long_url']) && isset($_POST['short_url'])){
+		$long_url = $_POST['long_url'];
+		$short_url = $_POST['short_url'];
+
+		$sqlAdd = "INSERT INTO translation (short_url, long_url) VALUES ('$short_url', '$long_url')";
+		$conn = getConnection();
+		try{
+			$result = $conn->query($sqlAdd);
+			$shortened = true;
+		}catch(PDOException $e){
+			$operation_failed = true;
+			if($e->getCode() == 23000){
+				$reason = "String '$short_url' already exists.";
+			}else{
+				$reason = "Unknown error.";
+			}
+		}
+		$conn = null;
+	}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 17-04-2016 -->
+	<!-- pbucho, 18-04-2016 -->
 	<head>
 		<title>Add URL</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
@@ -33,7 +59,19 @@
 		<div class="container">
 			<h1>Add URL</h1>
 			<hr/>
-			<form class="form-horizontal" role="form">
+			<?php
+				if($operation_failed){
+					echo "<div class='alert alert-danger'>";
+					echo "Could not shorten URL: ".$reason;
+					echo "</div>";
+				}
+				if($shortened){
+					echo "<div class='alert alert-success'>";
+					echo "URL shortened successfully: <code>$SHORT_BASE/$short_url</code>";
+					echo "</div>";
+				}
+			?>
+			<form class="form-horizontal" role="form" action="add.php" method="post">
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="long_url">Long URL:</label>
 					<div class="col-sm-10">
@@ -41,9 +79,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="short_url">Short URL:</label>
+					<label class="control-label col-sm-2" for="short_url">String:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="long_url" name="long_url" placeholder="Short URL" required>
+						<input type="text" class="form-control" id="short_url" name="short_url" placeholder="String" required>
 					</div>
 				</div>
 				<div class="form-group">

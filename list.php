@@ -1,4 +1,8 @@
-<?php include_once("conf.php"); ?>
+<?php
+	include_once("conf.php");
+
+	global $SHORT_BASE;
+?>
 <!DOCTYPE HTML>
 <html lang="en">
 	<!-- pbucho, 16-04-2016 -->
@@ -15,7 +19,7 @@
 		<?php include("resources/top_menu.php"); ?>
 		<div class="container">
 			<h1>Redirector URL list</h1>
-			<p>Short URLs to be used in the format <code>r.bucho.pt/string</code></p>
+			<p>Short URLs to be used in the format <code><?php echo $SHORT_BASE; ?>/string</code></p>
 			<hr/>
 			<table class="table table-hover" id="link_table">
 				<thead>

@@ -8,7 +8,7 @@
 
 	$DEFAULT = "/login.php";
 	$LOGIN_EXPIRY_S = 7200;
-
+	$SHORT_BASE = "r.bucho.pt";
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 
 	ini_set('display_errors', 1);
