@@ -26,20 +26,25 @@
 		$long_url = $_POST['long_url'];
 		$short_url = $_POST['short_url'];
 
-		$sqlAdd = "INSERT INTO translation (short_url, long_url) VALUES ('$short_url', '$long_url')";
-		$conn = getConnection();
-		try{
-			$result = $conn->query($sqlAdd);
-			$shortened = true;
-		}catch(PDOException $e){
+		if(empty($long_url) || empty($short_url)){
 			$operation_failed = true;
-			if($e->getCode() == 23000){
-				$reason = "String '$short_url' already exists.";
-			}else{
-				$reason = "Unknown error.";
+			$reason = "URL not provided";
+		}else{
+			$sqlAdd = "INSERT INTO translation (short_url, long_url) VALUES ('$short_url', '$long_url')";
+			$conn = getConnection();
+			try{
+				$result = $conn->query($sqlAdd);
+				$shortened = true;
+			}catch(PDOException $e){
+				$operation_failed = true;
+				if($e->getCode() == 23000){
+					$reason = "String '$short_url' already exists.";
+				}else{
+					$reason = "Unknown error.";
+				}
 			}
+			$conn = null;
 		}
-		$conn = null;
 	}
 
 ?>
@@ -75,13 +80,25 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="long_url">Long URL:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="long_url" name="long_url" placeholder="Long URL" required>
+						<input type="text" class="form-control" id="long_url" name="long_url" placeholder="Long URL"
+						<?php
+							if($operation_failed){
+								echo "value='$long_url'";
+							}
+						?>
+						required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="short_url">String:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="short_url" name="short_url" placeholder="String" required>
+						<input type="text" class="form-control" id="short_url" name="short_url" placeholder="String"
+						<?php
+							if($operation_failed){
+								echo "value='$short_url'";
+							}
+						?>
+						required>
 					</div>
 				</div>
 				<div class="form-group">
