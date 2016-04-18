@@ -19,6 +19,8 @@
 		return date("Y");
 	}
 
+	// if there are the cookies of a session, returns an array with their content
+	// otherwise, returns false
 	function has_session(){
 		if(isset($_COOKIE['user']) && isset($_COOKIE['token'])){
 			return array('user' => $_COOKIE['user'], 'token' => $_COOKIE['token']);

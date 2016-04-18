@@ -1,6 +1,8 @@
 <?php
 
 	include_once("secrets.php");
+	include_once("tokens.php");
+	include_once("cookies.php");
 
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -54,5 +56,24 @@
 
 	function fetchLazy($result){
 		return $result->fetch(PDO::FETCH_LAZY);
+	}
+
+	// this automatically checks for cookies, validates them and,
+	// if there isn't a valid session, will redirect to login
+	function validate_login(){
+		$session = has_session();
+		if($session == false){
+			header("Location: /login.php");
+		}
+
+		$cuser = $session['user'];
+		$ctoken = $session['token'];
+
+		$result = validate_token($ctoken);
+
+		if(!$result){
+			header("Location: /login.php");
+		}
+		return true;
 	}
 ?>
