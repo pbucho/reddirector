@@ -1,6 +1,7 @@
 <?php
 	include_once("conf.php");
 	include_once("tokens.php");
+	include_once("cookies.php");
 
 	$login_failed = false;
 	$cookie_info = has_session();

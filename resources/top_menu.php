@@ -1,4 +1,8 @@
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/conf.php"); ?>
+<?php
+	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
+	include_once($DOC_ROOT."/conf.php");
+	include_once($DOC_ROOT."/cookies.php");
+?>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
