@@ -15,14 +15,6 @@ CREATE TABLE `redirect`.`requests` (
   `ok` tinyint(1) NOT NULL DEFAULT 0
 );
 
-CREATE TABLE `redirect`.`translation` (
-  `short_url` varchar(25) NOT NULL,
-  `long_url` varchar(255) NOT NULL,
-  `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `views` int(10) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`short_url`)
-);
-
 CREATE TABLE `redirect`.`users` (
 	id int NOT NULL,
 	name varchar(25) NOT NULL,
@@ -31,6 +23,16 @@ CREATE TABLE `redirect`.`users` (
 	last_login datetime,
 	last_ip varchar(255),
 	PRIMARY KEY(id)
+);
+
+CREATE TABLE `redirect`.`translation` (
+  `short_url` varchar(25) NOT NULL,
+  `long_url` varchar(255) NOT NULL,
+  `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `owner` int,
+  `views` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`short_url`),
+  FOREIGN KEY (owner) REFERENCES `redirect`.`users`(id)
 );
 
 CREATE UNIQUE INDEX username_idx USING HASH ON `redirect`.`users`(name);
