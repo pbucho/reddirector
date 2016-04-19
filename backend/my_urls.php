@@ -32,7 +32,20 @@
 				<tbody>
 					<?php
 						$sqlURL = "SELECT short_url, long_url, added, views FROM translation t INNER JOIN users u ON t.owner = u.id WHERE u.name = '$cuser'";
-						// TODO finish
+						$conn = getConnection();
+						$result = $conn->query($sqlURL);
+						$conn = null;
+						
+						$result = $result->fetchAll();
+						
+						foreach($result as $item){
+							echo "<tr>";
+							echo "<td>".$item['short_url']."</td>";
+							echo "<td><a href='".$item['long_url']."' target='_blank'>".$item['long_url']."</a></td>";
+							echo "<td>".$item['added']."</td>";
+							echo "<td>".$item['views']."</td>";
+							echo "</tr>";
+						}
 					?>
 				</tbody>
 			</table>
