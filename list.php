@@ -5,15 +5,12 @@
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 16-04-2016 -->
+	<!-- pbucho, 19-04-2016 -->
 	<head>
 		<title>Redirector URL list</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
-		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-			crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 	</head>
 	<body>
 		<?php include("resources/top_menu.php"); ?>
@@ -51,23 +48,18 @@
 				</tbody>
 			</table>
 			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
-			</script>
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-				integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-				crossorigin="anonymous">
-			</script>
-			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
-			</script>
-
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$("#link_table").dataTable( {
-						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-						"order": [[ 2, "desc" ]]
-					});
-				});
-			</script>
 		</div>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#link_table").dataTable( {
+					"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+					"order": [[ 2, "desc" ]]
+				});
+			});
+		</script>
 	</body>
 </html>

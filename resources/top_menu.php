@@ -6,13 +6,13 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../list.php">Redirector</a>
+      <a class="navbar-brand" href="/list.php">Redirector</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="../list.php">List</a></li>
-      <li><a href="../log.php">Log</a></li>
-      <li><a href="../backend/add.php">Add URL</a></li>
-	  <li><a href="../backend/my_urls.php">My URLS</a></li>
+      <li><a href="/list.php">List</a></li>
+      <li><a href="/log.php">Log</a></li>
+      <li><a href="/backend/add.php">Add URL</a></li>
+	  <li><a href="/backend/my_urls.php">My URLS</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <?php

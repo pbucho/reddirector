@@ -1,6 +1,6 @@
 <?php
 	include_once("../conf.php");
-	include_onec("../cookies.php");
+	include_once("../cookies.php");
 
 	validate_login();
 	
@@ -12,11 +12,8 @@
 	<!-- pbucho, 19-04-2016 -->
 	<head>
 		<title>My URLs</title>
-		<link rel="stylesheet" href="/resources/backwards.css">
-		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-			crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/backwards.css">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
@@ -40,12 +37,8 @@
 				</tbody>
 			</table>
 			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
-			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
-			</script>
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-				integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-				crossorigin="anonymous">
-			</script>
+			<script type="text/javascript" src="/js/jquery.min.js"></script>
+			<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		</div>
 	</body>
 </html>
