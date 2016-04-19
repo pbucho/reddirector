@@ -107,7 +107,6 @@
 					</div>
 				</div>
 			</form>
-			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
 			</script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
@@ -115,5 +114,6 @@
 				crossorigin="anonymous">
 			</script>
 		</div>
+		<?php include("../resources/footer.php"); ?>
 	</body>
 </html>

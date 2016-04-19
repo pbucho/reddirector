@@ -10,6 +10,10 @@
 	$LOGIN_EXPIRY_S = 7200;
 	$SHORT_BASE = "r.bucho.pt";
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
+	
+	$AUTHOR = "Pedro Bucho";
+	$VERSION = "v0.1";
+	$SDATE = "2016-04-19";
 
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
@@ -81,5 +85,19 @@
 			return false;
 		}
 	}
-
+	
+	function get_author(){
+		global $AUTHOR;
+		return $AUTHOR;
+	}
+	
+	function get_software_version(){
+		global $VERSION;
+		return $VERSION;
+	}
+	
+	function get_software_date(){
+		global $SDATE;
+		return $SDATE;
+	}
 ?>
