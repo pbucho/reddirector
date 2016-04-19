@@ -47,12 +47,12 @@
 					?>
 				</tbody>
 			</table>
-			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
 		</div>
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
 		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
-
+			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
+			</script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#link_table").dataTable( {
@@ -61,5 +61,7 @@
 				});
 			});
 		</script>
+		</div>
+		<?php include("./resources/footer.php"); ?>
 	</body>
 </html>

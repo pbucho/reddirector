@@ -91,9 +91,9 @@
 					</div>
 				</div>
 			</form>
-			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
 			<script type="text/javascript" src="/js/jquery.min.js"></script>
 			<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 		</div>
+		<?php include("../resources/footer.php"); ?>
 	</body>
 </html>

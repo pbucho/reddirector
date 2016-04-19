@@ -79,8 +79,8 @@
 				<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
 				<input type="submit" value="Log in" class="btn btn-lg btn-primary btn-block">
 			</form>
-			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, 2016</p>
 			<script src="https://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 		</div>
+		<?php include("./resources/footer.php"); ?>
 	</body>
 </html>
