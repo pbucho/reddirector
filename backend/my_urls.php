@@ -9,11 +9,12 @@
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 19-04-2016 -->
+	<!-- pbucho, 25-04-2016 -->
 	<head>
 		<title>My URLs</title>
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/resources/font-awesome/css/font-awesome.min.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
@@ -46,7 +47,7 @@
 							echo "<td>".$item['added']."</td>";
 							echo "<td>".$item['views']."</td>";
 							echo "<td>";
-							echo "<span class='.fa-trash-o'></span>batata";
+							echo "<a href='/backend/delete.php?url=".$item['short_url']."'><span class='fa fa-trash-o fa-2x'></span></a>";
 							echo "</td>";
 							echo "</tr>";
 						}
