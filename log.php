@@ -6,9 +6,7 @@
 		<title>Redirector access log</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-			integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-			crossorigin="anonymous">
+		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
 	</head>
 	<body>
@@ -49,10 +47,7 @@
 			</table>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
 			</script>
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-				integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-				crossorigin="anonymous">
-			</script>
+			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
 			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
 			</script>
 

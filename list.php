@@ -5,12 +5,13 @@
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 19-04-2016 -->
+	<!-- pbucho, 16-04-2016 -->
 	<head>
 		<title>Redirector URL list</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
-		<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
 	</head>
 	<body>
 		<?php include("resources/top_menu.php"); ?>
@@ -47,20 +48,21 @@
 					?>
 				</tbody>
 			</table>
-		</div>
-		<script type="text/javascript" src="/js/jquery.min.js"></script>
-		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
+			</script>
+			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js">
+			</script>
 			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
 			</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#link_table").dataTable( {
-					"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-					"order": [[ 2, "desc" ]]
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#link_table").dataTable( {
+						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+						"order": [[ 2, "desc" ]]
+					});
 				});
-			});
-		</script>
+			</script>
 		</div>
 		<?php include("./resources/footer.php"); ?>
 	</body>

@@ -13,7 +13,7 @@
 	<head>
 		<title>My URLs</title>
 		<link rel="stylesheet" href="/css/backwards.css">
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
@@ -27,6 +27,7 @@
 						<th>Long URL</th>
 						<th>Date added</th>
 						<th>Views</th>
+						<th>Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,6 +45,9 @@
 							echo "<td><a href='".$item['long_url']."' target='_blank'>".$item['long_url']."</a></td>";
 							echo "<td>".$item['added']."</td>";
 							echo "<td>".$item['views']."</td>";
+							echo "<td>";
+							echo "<span class='.fa-trash-o'></span>batata";
+							echo "</td>";
 							echo "</tr>";
 						}
 					?>
@@ -51,7 +55,7 @@
 			</table>
 			<p style="text-align: center"><span class="backwards">&copy;</span> Pedro Bucho, <?php echo get_current_year(); ?></p>
 			<script type="text/javascript" src="/js/jquery.min.js"></script>
-			<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
 		</div>
 	</body>
 </html>

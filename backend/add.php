@@ -1,9 +1,22 @@
 <?php
 	include_once("../conf.php");
+	include_once("../tokens.php");
 
 	global $SHORT_BASE;
 
-	validate_login();
+	$cookie_info = has_session();
+
+	if($cookie_info == false){
+		delete_cookie("user");
+		delete_cookie("token");
+		header("Location: /login.php");
+	}
+
+	if(!validate_token($cookie_info['token'])){
+		delete_cookie("user");
+		delete_cookie("token");
+		header("Location: /login.php");
+	}
 
 	$operation_failed = false;
 	$shortened = false;
@@ -41,7 +54,8 @@
 	<head>
 		<title>Add URL</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
@@ -91,8 +105,9 @@
 					</div>
 				</div>
 			</form>
-			<script type="text/javascript" src="/js/jquery.min.js"></script>
-			<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
+			</script>
+			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
 		</div>
 		<?php include("../resources/footer.php"); ?>
 	</body>
