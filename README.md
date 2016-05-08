@@ -1,2 +1,2 @@
-# redirector
+# reddirector
 Custom URL redirection

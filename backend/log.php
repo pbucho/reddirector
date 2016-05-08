@@ -1,7 +1,10 @@
-<?php include_once("conf.php"); ?>
+<?php
+	include_once("../conf.php");
+	validate_login("log");
+?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 16-04-2016 -->
+	<!-- pbucho, 08-05-2016 -->
 	<head>
 		<title>Redirector access log</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
@@ -10,7 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
 	</head>
 	<body>
-		<?php include("resources/top_menu.php"); ?>
+		<?php include("../resources/top_menu.php"); ?>
 		<div class="container">
 			<h1>Redirector access log</h1>
 			<hr/>
@@ -60,6 +63,6 @@
 				});
 			</script>
 		</div>
-		<?php include("./resources/footer.php"); ?>
+		<?php include("../resources/footer.php"); ?>
 	</body>
 </html>

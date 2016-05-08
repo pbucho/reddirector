@@ -4,7 +4,7 @@
 
 	global $SHORT_BASE;
 
-	$cookie_info = has_session();
+	/*$cookie_info = has_session();
 
 	if($cookie_info == false){
 		delete_cookie("user");
@@ -16,7 +16,9 @@
 		delete_cookie("user");
 		delete_cookie("token");
 		header("Location: /login.php");
-	}
+	}*/
+
+	validate_login("add");
 
 	$operation_failed = false;
 	$shortened = false;

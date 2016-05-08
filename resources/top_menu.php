@@ -10,7 +10,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/list.php">List</a></li>
-      <li><a href="/log.php">Log</a></li>
+      <li><a href="/backend/log.php">Log</a></li>
       <li><a href="/backend/add.php">Add URL</a></li>
 	  <li><a href="/backend/my_urls.php">My URLS</a></li>
     </ul>

@@ -6,12 +6,17 @@
 	$login_failed = false;
 	$cookie_info = has_session();
 
+	$next_page = "add";
+	if(isset($_GET['next'])){
+		$next_page = $_GET['next'];
+	}
+
 	if($cookie_info != false){
 		$token = $cookie_info['token'];
 		$validToken = validate_token($token);
 
 		if($validToken){
-			header("Location: /backend/add.php");
+			header("Location: /backend/".$next_page.".php");
 		}
 	}
 
@@ -35,13 +40,13 @@
 			create_or_update_cookie("user", $cuser, $token_array['expiry']);
 			create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
 
-			header("Location: /backend/add.php");
+			header("Location: /backend/".$next_page.".php");
 		}
 	}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 17-04-2016 -->
+	<!-- pbucho, 08-05-2016 -->
 	<head>
 		<title>Redirector login</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
@@ -60,7 +65,7 @@
 	<body>
 		<?php include("resources/top_menu.php"); ?>
 		<div class="container">
-			<form class="form-signin" action="login.php" method="post">
+			<form class="form-signin" action="login.php<?php if(isset($_GET['next'])) echo "?next=".$_GET['next']; ?>" method="post">
 				<h2>Redirector login</h2>
 				<?php
 					if($login_failed){

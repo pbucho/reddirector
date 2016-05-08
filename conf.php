@@ -12,7 +12,7 @@
 	$LOGIN_EXPIRY_S = 7200;
 	$SHORT_BASE = "r.bucho.pt";
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
-	
+
 	$AUTHOR = "Pedro Bucho";
 	$VERSION = "v0.1";
 	$SDATE = "2016-04-19";
@@ -64,10 +64,14 @@
 
 	// this automatically checks for cookies, validates them and,
 	// if there isn't a valid session, will redirect to login
-	function validate_login(){
+	function validate_login($next_page){
 		$session = has_session();
 		if($session == false){
-			header("Location: /login.php");
+			if($next_page == null){
+				header("Location: /login.php");
+			}else{
+				header("Location: /login.php?next=".$next_page);
+			}
 		}
 
 		$cuser = $session['user'];
@@ -76,21 +80,25 @@
 		$result = validate_token($ctoken);
 
 		if(!$result){
-			header("Location: /login.php");
+			if($next_page == null){
+				header("Location: /login.php");
+			}else{
+				header("Location: /login.php?next=".$next_page);
+			}
 		}
 		return true;
 	}
-	
+
 	function get_author(){
 		global $AUTHOR;
 		return $AUTHOR;
 	}
-	
+
 	function get_software_version(){
 		global $VERSION;
 		return $VERSION;
 	}
-	
+
 	function get_software_date(){
 		global $SDATE;
 		return $SDATE;
