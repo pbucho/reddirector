@@ -14,8 +14,8 @@
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 
 	$AUTHOR = "Pedro Bucho";
-	$VERSION = "v0.1";
-	$SDATE = "2016-04-19";
+	$VERSION = "v0.2";
+	$SDATE = "2016-05-08";
 
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
