@@ -10,7 +10,7 @@
 		$conn = getConnection();
 		$result = $conn->query($sqlValidate);
 		$conn = null;
-		$result = $result->fetch(PDO::FETCH_LAZY);
+		$result = fetchLazy($result);
 
 		if($result == false){
 			return false;
@@ -31,14 +31,14 @@
 		}
 	}
 
-	function generate_token($user){
+	function generate_token(){
 		return bin2hex(openssl_random_pseudo_bytes(25));
 	}
 
 	function generate_and_persist_token($user){
 		global $TOKEN_DURATION;
 
-		$token = generate_token($user);
+		$token = generate_token();
 		$expiry = time() + $TOKEN_DURATION;
 
 		$sqlUsr = "SELECT id FROM users WHERE name = '$user'";

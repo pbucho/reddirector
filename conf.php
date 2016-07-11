@@ -65,8 +65,8 @@
 	// this automatically checks for cookies, validates them and,
 	// if there isn't a valid session, will redirect to login
 	function validate_login($next_page){
-		$session = has_session();
-		if($session == false){
+		$session_token = has_session();
+		if($session_token == false){
 			if($next_page == null){
 				header("Location: /login.php");
 			}else{
@@ -74,10 +74,7 @@
 			}
 		}
 
-		$cuser = $session['user'];
-		$ctoken = $session['token'];
-
-		$result = validate_token($ctoken);
+		$result = validate_token($session_token);
 
 		if(!$result){
 			if($next_page == null){

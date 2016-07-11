@@ -4,16 +4,15 @@
 	include_once("cookies.php");
 
 	$login_failed = false;
-	$cookie_info = has_session();
+	$session_token = has_session();
 
 	$next_page = "add";
 	if(isset($_GET['next'])){
 		$next_page = $_GET['next'];
 	}
 
-	if($cookie_info != false){
-		$token = $cookie_info['token'];
-		$validToken = validate_token($token);
+	if($session_token != false){
+		$validToken = validate_token($session_token);
 
 		if($validToken){
 			header("Location: /backend/".$next_page.".php");
@@ -27,8 +26,8 @@
 		$sqlPswd = "SELECT password FROM users WHERE name = '$cuser'";
 		$conn = getConnection();
 		$result = $conn->query($sqlPswd);
-		$result = $result->fetch(PDO::FETCH_LAZY);
 		$conn = null;
+		$result = fetchLazy($result);
 
 		$stored_pswd = $result['password'];
 
@@ -37,7 +36,6 @@
 		}else{
 			$token_array = generate_and_persist_token($cuser);
 
-			create_or_update_cookie("user", $cuser, $token_array['expiry']);
 			create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
 
 			header("Location: /backend/".$next_page.".php");
