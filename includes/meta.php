@@ -3,9 +3,9 @@
   $DEBUG = false;
 
   $AUTHOR = "Pedro Bucho";
-  $VERSION = "v0.3";
+  $VERSION = "v0.3-SNAPSHOT";
   $SDATE = "2016-07-11";
 
   $SITE_NAME = "Reddirector";
-	$SHORT_BASE = "r.bucho.pt";
+  $SHORT_BASE = "r.bucho.pt";
 ?>
