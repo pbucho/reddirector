@@ -1,13 +1,15 @@
 <?php
-	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
+	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT']."/includes";
 	include_once($DOC_ROOT."/conf.php");
 	include_once($DOC_ROOT."/cookies.php");
 	include_once($DOC_ROOT."/cache.php");
+	include_once($DOC_ROOT."/meta.php");
+	global $SITE_NAME;
 ?>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/list.php">Redirector</a>
+      <a class="navbar-brand" href="/list.php"><?php echo $SITE_NAME; ?></a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/list.php">List</a></li>

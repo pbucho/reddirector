@@ -1,11 +1,10 @@
 <?php
-	include_once("conf.php");
-
+	include_once("includes/conf.php");
+	include_once("includes/meta.php");
 	global $SHORT_BASE;
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 16-04-2016 -->
 	<head>
 		<title>Redirector URL list</title>
 		<link rel="stylesheet" href="/resources/backwards.css">

@@ -1,9 +1,9 @@
 <?php
-	include_once("../conf.php");
-	include_once("../cookies.php");
+	include_once("../includes/conf.php");
+	include_once("../includes/cookies.php");
 
 	validate_login();
-	
+
 	$cuser = has_session()['user'];
 
 ?>
@@ -37,9 +37,9 @@
 						$conn = getConnection();
 						$result = $conn->query($sqlURL);
 						$conn = null;
-						
+
 						$result = $result->fetchAll();
-						
+
 						foreach($result as $item){
 							echo "<tr>";
 							echo "<td>".$item['short_url']."</td>";

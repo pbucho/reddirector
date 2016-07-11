@@ -1,25 +1,20 @@
 <?php
-
 	include_once("secrets.php");
 	include_once("tokens.php");
 	include_once("cookies.php");
+	include_once("meta.php");
+	global $DEBUG;
 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	if($DEBUG){
+		echo "<div class='alert alert-warning'>Debugging is enabled</div>";
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+	}
 
 	$DEFAULT = "/login.php";
 	$LOGIN_EXPIRY_S = 7200;
-	$SHORT_BASE = "r.bucho.pt";
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
-
-	$AUTHOR = "Pedro Bucho";
-	$VERSION = "v0.2";
-	$SDATE = "2016-05-08";
-
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
 
 	function getConnection(){
 		global $server, $database, $username, $password;
@@ -38,6 +33,11 @@
 			}
 		}
 		return "False";
+	}
+
+	// from http://stackoverflow.com/a/10473026
+	function startsWith($haystack, $needle) {
+  	return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
 	}
 
 	function get_404_image() {
@@ -86,18 +86,7 @@
 		return true;
 	}
 
-	function get_author(){
-		global $AUTHOR;
-		return $AUTHOR;
-	}
-
-	function get_software_version(){
-		global $VERSION;
-		return $VERSION;
-	}
-
-	function get_software_date(){
-		global $SDATE;
-		return $SDATE;
+	function get_current_year(){
+		return date("Y");
 	}
 ?>

@@ -1,5 +1,6 @@
 <?php
-	include_once("conf.php");
+	include_once("includes/conf.php");
+	include_once("includes/cache.php");
 
 	if(!isset($_GET['short'])){
 		header("Location: $DEFAULT");
@@ -7,17 +8,15 @@
 	}
 
 	$short_url = $_GET['short'];
-	$sql = "SELECT long_url FROM translation WHERE short_url = '$short_url'";
 	$sqlUpd = "UPDATE translation SET views = views + 1 WHERE short_url = '$short_url'";
-
-	$conn = getConnection();
-	$result = $conn->query($sql);
-	$result = fetchLazy($result);
 
 	$ip = $_SERVER['REMOTE_ADDR'];
 	$sqlReq = "INSERT INTO requests (request, ip, ok) VALUES ('$short_url', '$ip',";
 
-	if(!isset($result['long_url'])){
+	$long_url = get_cached_long_url($short_url);
+
+	$conn = getConnection();
+	if(is_null($long_url)){
 		$sqlReq .= "'0')";
 		$conn->query($sqlReq);
 		$conn = null;
@@ -26,7 +25,6 @@
 		die;
 	}
 
-	$long_url = $result['long_url'];
 	$conn->query($sqlUpd);
 
 	$sqlReq .= "'1')";
@@ -34,6 +32,9 @@
 
 	$conn = null;
 
+	if(!startsWith($long_url, "http://") && !startsWith($long_url, "https://")){
+		$long_url = "http://".$long_url;
+	}
 	header("Location: $long_url");
 
 ?>

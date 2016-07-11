@@ -15,10 +15,6 @@
 		setcookie($name, $value, $exp);
 	}
 
-	function get_current_year(){
-		return date("Y");
-	}
-
 	// if existing, returns the content of the token cookie
 	function has_session(){
 		if(isset($_COOKIE['token'])){

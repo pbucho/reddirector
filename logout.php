@@ -1,7 +1,7 @@
 <?php
-	include_once("conf.php");
-	include_once("tokens.php");
-	include_once("cookies.php");
+	include_once("includes/conf.php");
+	include_once("includes/tokens.php");
+	include_once("includes/cookies.php");
 
 	$session_info = has_session();
 

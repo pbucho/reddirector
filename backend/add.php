@@ -1,22 +1,7 @@
 <?php
-	include_once("../conf.php");
-	include_once("../tokens.php");
-
+	include_once("../includes/conf.php");
+	include_once("../includes/tokens.php");
 	global $SHORT_BASE;
-
-	/*$cookie_info = has_session();
-
-	if($cookie_info == false){
-		delete_cookie("user");
-		delete_cookie("token");
-		header("Location: /login.php");
-	}
-
-	if(!validate_token($cookie_info['token'])){
-		delete_cookie("user");
-		delete_cookie("token");
-		header("Location: /login.php");
-	}*/
 
 	validate_login("add");
 

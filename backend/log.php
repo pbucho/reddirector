@@ -1,10 +1,9 @@
 <?php
-	include_once("../conf.php");
+	include_once("../includes/conf.php");
 	validate_login("log");
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 08-05-2016 -->
 	<head>
 		<title>Redirector access log</title>
 		<link rel="stylesheet" href="/resources/backwards.css">
