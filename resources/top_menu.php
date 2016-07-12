@@ -23,7 +23,7 @@
 					echo "<li><a href='/backend/my_urls.php'>My URLs</a></li>";
 				}
 				if($roles_is_admin){
-					echo "<li><a href='/backend/log.php'>Log</a></li>";
+					echo "<li><a href='/backend/access_log.php'>Access log</a></li>";
 				}
 			?>
     </ul>

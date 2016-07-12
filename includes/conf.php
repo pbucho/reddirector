@@ -14,7 +14,7 @@
 
 	$DEFAULT = "/login.php";
 	$LOGIN_EXPIRY_S = 7200;
-	$TOKEN_DURATION = 15552000; // 6 months in seconds
+	$TOKEN_DURATION = 86400; // 24hrs in seconds
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 
 	function conf_get_connection(){

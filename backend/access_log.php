@@ -3,10 +3,10 @@
 	include_once("../includes/cache.php");
 	include_once("../includes/roles.php");
 
-	conf_validate_login("log");
+	conf_validate_login("my_urls");
 	$session_token = cookies_has_session();
 	if(!roles_is_admin(cache_get_cached_user($session_token))){
-		header("Location: /backend/add.php");
+		header("Location: /list.php");
 	}
 ?>
 <!DOCTYPE HTML>
@@ -14,7 +14,8 @@
 	<head>
 		<title>Redirector access log</title>
 		<link rel="stylesheet" href="/css/backwards.css">
-		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
 	</head>

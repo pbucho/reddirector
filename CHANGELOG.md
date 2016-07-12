@@ -8,6 +8,10 @@ Changelog
 - Roles
 - My URLs page
 - URL modification for owned URLs
+- String deletion
+- Favicon
+- API
+- Admin control over all strings
 
 ### Changed
 - Log is now accessible only to users with `admin` role

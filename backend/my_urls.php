@@ -10,33 +10,53 @@
 
 	$operation_failed = false;
 	$modified = false;
+	$deleted = false;
 	$reason = null;
 
-	if(isset($_POST['short_url']) && isset($_POST['long_url'])){
+	if(isset($_POST['short_url']) && isset($_POST['operation'])){
+		$operation = intval($_POST['operation']);
 		$short_url = $_POST['short_url'];
-		$new_long_url = $_POST['long_url'];
+		$new_long_url = isset($_POST['long_url']) ? $_POST['long_url'] : null;
 
-		// to ensure that the modification operarion is being performed by the short url
-		// legitimate owner
-		$sqlValidateUrl = "SELECT t.short_url FROM tokens tk INNER JOIN translation t ON tk.owner = t.owner WHERE tk.value = '$session_token' AND t.short_url = '$short_url'";
-		$conn = conf_get_connection();
-		$result = $conn->query($sqlValidateUrl);
-		$result = conf_fetch_lazy($result);
-
-		if($result == false){
+		if($operation != 0 && $operation != 1){
 			$operation_failed = true;
-			$reason = "Invalid short URL";
+			$reason = "Unknown operation";
 		}else{
-			$sqlUpdateUrl = "UPDATE translation SET long_url = '$new_long_url' WHERE short_url = '$short_url'";
-			try{
-				$result = $conn->query($sqlUpdateUrl);
-				$modified = true;
-			}catch(PDOException $e){
+			// to ensure that the modification operarion is being performed by the short url
+			// legitimate owner
+			$sqlValidateUrl = "SELECT t.short_url FROM tokens tk INNER JOIN translation t ON tk.owner = t.owner WHERE tk.value = '$session_token' AND t.short_url = '$short_url'";
+			$conn = conf_get_connection();
+			$result = $conn->query($sqlValidateUrl);
+			$result = conf_fetch_lazy($result);
+
+			if($result == false){
 				$operation_failed = true;
-				$reason = "An error occurred (code: ".$e->getCode().")";
+				$reason = "Invalid short URL";
+			}else{
+				if($operation == 1){
+					if(is_null($new_long_url)){
+						$operation_failed = true;
+						$reason = "Missing long URL";
+					}else{
+						$sqlUrl = "UPDATE translation SET long_url = '$new_long_url' WHERE short_url = '$short_url'";
+					}
+				}else if($operation == 0){
+					$sqlUrl = "DELETE FROM translation WHERE short_url = '$short_url'";
+				}
+				try{
+					$result = $conn->query($sqlUrl);
+					$modified = $operation == 1 ? true : false;
+					$deleted = $operation == 0 ? true : false;
+				}catch(PDOException $e){
+					$operation_failed = true;
+					$reason = "An error occurred (code: ".$e->getCode().")";
+					if($DEBUG){
+						$reason = $reason." ".$e->getMessage();
+					}
+				}
 			}
+			$conn = null;
 		}
-		$conn = null;
 	}
 
 ?>
@@ -45,7 +65,8 @@
 	<head>
 		<title>My URLs</title>
 		<link rel="stylesheet" href="/css/backwards.css">
-		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -59,12 +80,15 @@
 			<?php
 				if($operation_failed){
 					echo "<div class='alert alert-danger'>";
-					echo "Could not modify URL: ".$reason;
+					echo "Could not modify or delete URL: ".$reason;
 					echo "</div>";
-				}
-				if($modified){
+				}else if($modified){
 					echo "<div class='alert alert-success'>";
 					echo "URL modified successfully";
+					echo "</div>";
+				}else if($deleted){
+					echo "<div class='alert alert-success'>";
+					echo "URL deleted successfully";
 					echo "</div>";
 				}
 			?>
@@ -80,7 +104,8 @@
 				</thead>
 				<tbody>
 					<?php
-						$sqlURL = "SELECT short_url, long_url, added, views FROM translation t INNER JOIN users u ON t.owner = u.id WHERE u.name = '$cuser'";
+						//$sqlURL = "SELECT short_url, long_url, added, views FROM translation t INNER JOIN users u ON t.owner = u.id WHERE u.name = '$cuser'";
+						$sqlURL = "SELECT short_url, long_url, t.added AS added, views FROM translation t INNER JOIN tokens tk ON t.owner = tk.owner WHERE tk.value = '$session_token'";
 						$conn = conf_get_connection();
 						$result = $conn->query($sqlURL);
 						$conn = null;
@@ -95,8 +120,8 @@
 							echo "<td>".$item['added']."</td>";
 							echo "<td>".$item['views']."</td>";
 							echo "<td style='text-align: center'>";
-							echo "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal' onclick=\"setFields('".$item['long_url']."','".$item['short_url']."')\"><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;";
-							echo "<button class='btn btn-danger'><span class='fa fa-trash-o'></span></button>";
+							echo "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal' onclick=\"setEditFields('".$item['long_url']."','".$item['short_url']."')\"><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;";
+							echo "<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal' onclick=\"setConfirmFields('".$item['short_url']."')\"><span class='fa fa-trash-o'></span></button>";
 							echo "</td>";
 							echo "</tr>";
 						}
@@ -119,14 +144,21 @@
 				});
 			</script>
 			<script type="text/javascript">
-				function setFields(long_url, short_url) {
-					$("#long_url").val(long_url);
-					$("#short_url").val(short_url);
-					$("#short_url_disabled").val(short_url);
+				function setEditFields(long_url, short_url) {
+					$("#ed_long_url").val(long_url);
+					$("#ed_short_url").val(short_url);
+					$("#ed_short_url_disabled").val(short_url);
+				}
+				function setConfirmFields(short_url) {
+					$("#conf_short_url").val(short_url);
+					$("#conf_show_url").html(short_url);
 				}
 			</script>
 		</div>
 		<?php include("../resources/footer.php"); ?>
-		<?php include("../resources/edit_modal.php"); ?>
+		<?php
+			include("../resources/edit_modal.html");
+			include("../resources/confirm_modal.html");
+		?>
 	</body>
 </html>

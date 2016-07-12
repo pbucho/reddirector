@@ -6,7 +6,7 @@
 	$login_failed = false;
 	$session_token = cookies_has_session();
 
-	$next_page = "add";
+	$next_page = "my_urls";
 	if(isset($_GET['next'])){
 		$next_page = $_GET['next'];
 	}
@@ -48,6 +48,8 @@
 	<head>
 		<title>Redirector login</title>
 		<link rel="stylesheet" href="/css/backwards.css">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		<link href="https://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">

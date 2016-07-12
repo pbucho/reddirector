@@ -10,14 +10,15 @@
           <div class="form-group">
             <label class="control-label col-sm-3" for="long_url">Long URL:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="long_url" name="long_url" placeholder="Long URL" required>
+              <input type="text" class="form-control" id="ed_long_url" name="long_url" placeholder="Long URL" required>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-3" for="short_url">String:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" id="short_url_disabled" name="short_url_disabled" placeholder="String" required disabled="true">
-              <input type="hidden" id="short_url" name="short_url">
+              <input type="text" class="form-control" id="ed_short_url_disabled" name="short_url_disabled" placeholder="String" data-toggle="tooltip" title="You can't change this field" disabled="true">
+              <input type="hidden" id="ed_short_url" name="short_url">
+              <input type="hidden" name="operation" value="1">
             </div>
           </div>
         </div>

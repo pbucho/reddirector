@@ -23,6 +23,26 @@
     return $cached_username;
   }
 
+  function cache_get_cached_user_id($token){
+    global $ONE_HOUR;
+    $cached_id = apc_fetch("token-id-".$token);
+    if($cached_id == false){
+      $sqlRetrieveUserId = "SELECT id FROM tokens t INNER JOIN users u ON t.owner = u.id WHERE t.value = '$token'";
+      $conn = conf_get_connection();
+      $result = $conn->query($sqlRetrieveUserId);
+      $conn = null;
+
+      $result = conf_fetch_lazy($result);
+      if($result == false){
+        return null;
+      }else{
+        $cached_id = $result['id'];
+        apc_add("token-id-".$token, $cached_id, $ONE_HOUR);
+      }
+    }
+    return $cached_id;
+  }
+
   function cache_get_cached_long_url($short_url){
     global $ONE_HOUR;
     $cached_long_url = apc_fetch("url-".$short_url);

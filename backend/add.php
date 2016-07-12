@@ -1,9 +1,11 @@
 <?php
 	include_once("../includes/conf.php");
 	include_once("../includes/tokens.php");
+	include_once("../includes/cache.php");
 	global $SHORT_BASE;
 
 	conf_validate_login("add");
+	$session_token = cookies_has_session();
 
 	$operation_failed = false;
 	$shortened = false;
@@ -17,8 +19,14 @@
 			$operation_failed = true;
 			$reason = "URL not provided";
 		}else{
-			$sqlAdd = "INSERT INTO translation (short_url, long_url) VALUES ('$short_url', '$long_url')";
 			$conn = conf_get_connection();
+			$sqlAdd = "INSERT INTO translation (short_url, long_url, owner) VALUES ('$short_url', '$long_url', ";
+			if($session_token != false) {
+				$user_id = cache_get_cached_user_id($session_token);
+				$sqlAdd = $sqlAdd."$user_id)";
+			}else{
+				$sqlAdd = $sqlAdd."NULL)";
+			}
 			try{
 				$result = $conn->query($sqlAdd);
 				$shortened = true;
@@ -37,11 +45,11 @@
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
-	<!-- pbucho, 18-04-2016 -->
 	<head>
 		<title>Add URL</title>
 		<link rel="stylesheet" href="/css/backwards.css">
-		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
