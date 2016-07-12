@@ -3,16 +3,16 @@
 
   $ONE_HOUR = 3600;
 
-  function get_cached_user($token){
+  function cache_get_cached_user($token){
     global $LOGIN_EXPIRY_S;
     $cached_username = apc_fetch("token-".$token);
     if($cached_username == false){
       $sqlRetrieveUsername = "SELECT name FROM tokens t INNER JOIN users u ON t.owner = u.id WHERE t.value = '$token'";
-      $conn = getConnection();
+      $conn = conf_get_connection();
       $result = $conn->query($sqlRetrieveUsername);
       $conn = null;
 
-      $result = fetchLazy($result);
+      $result = conf_fetch_lazy($result);
       if($result == false){
         return null;
       }else{
@@ -23,16 +23,16 @@
     return $cached_username;
   }
 
-  function get_cached_long_url($short_url){
+  function cache_get_cached_long_url($short_url){
     global $ONE_HOUR;
     $cached_long_url = apc_fetch("url-".$short_url);
     if($cached_long_url == false){
       $sqlSelect = "SELECT long_url FROM translation WHERE short_url = '$short_url'";
-      $conn = getConnection();
+      $conn = conf_get_connection();
       $result = $conn->query($sqlSelect);
       $conn = null;
 
-      $result = fetchLazy($result);
+      $result = conf_fetch_lazy($result);
       if($result == false){
         return null;
       }else{

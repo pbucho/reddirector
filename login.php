@@ -4,7 +4,7 @@
 	include_once("includes/cookies.php");
 
 	$login_failed = false;
-	$session_token = has_session();
+	$session_token = cookies_has_session();
 
 	$next_page = "add";
 	if(isset($_GET['next'])){
@@ -12,7 +12,7 @@
 	}
 
 	if($session_token != false){
-		$validToken = validate_token($session_token);
+		$validToken = tokens_validate_token($session_token);
 
 		if($validToken){
 			header("Location: /backend/".$next_page.".php");
@@ -24,19 +24,19 @@
 		$upassword = $_POST['password'];
 
 		$sqlPswd = "SELECT password FROM users WHERE name = '$cuser'";
-		$conn = getConnection();
+		$conn = conf_get_connection();
 		$result = $conn->query($sqlPswd);
 		$conn = null;
-		$result = fetchLazy($result);
+		$result = conf_fetch_lazy($result);
 
 		$stored_pswd = $result['password'];
 
 		if(!password_verify($upassword, $stored_pswd)){
 			$login_failed = true;
 		}else{
-			$token_array = generate_and_persist_token($cuser);
+			$token_array = tokens_generate_and_persist_token($cuser);
 
-			create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
+			cookies_create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
 
 			header("Location: /backend/".$next_page.".php");
 		}
@@ -47,7 +47,7 @@
 	<!-- pbucho, 08-05-2016 -->
 	<head>
 		<title>Redirector login</title>
-		<link rel="stylesheet" href="/resources/backwards.css">
+		<link rel="stylesheet" href="/css/backwards.css">
 		<link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		<link href="https://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">

@@ -1,10 +1,17 @@
 Changelog
 =========
-[0.3-SNAPSHOT] 2016-07-11
+[0.3-SNAPSHOT] 2016-07-12
 -------------------------
 ### Added
-- Username caching
+- User name caching
 - URL caching
+- Roles
+- My URLs page
+- URL modification for owned URLs
+
+### Changed
+- Log is now accessible only to users with `admin` role
+- Harmonized functions naming (added prefixes to functions names)
 
 ### Removed
 - Unused functions to get global variables values (replaced by direct access to those variables)
@@ -12,7 +19,7 @@ Changelog
 [0.2] 2016-05-08
 ----------------
 ### Changed
-- Moved access log to backend
+- Moved access log to back-end
 
 [0.1] 2016-04-19
 ----------------

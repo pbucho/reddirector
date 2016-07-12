@@ -7,7 +7,7 @@
 <html lang="en">
 	<head>
 		<title>Redirector URL list</title>
-		<link rel="stylesheet" href="/resources/backwards.css">
+		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
@@ -30,16 +30,17 @@
 				<tbody>
 					<?php
 						$sql = "SELECT * FROM translation";
-						$conn = getConnection();
+						$conn = conf_get_connection();
 						$result = $conn->query($sql);
 						$conn = null;
 
 						$result = $result->fetchAll();
 
 						foreach($result as $item){
+							$long_url_item = conf_starts_with($item['long_url'], "http://") || conf_starts_with($item['long_url'], "https://") ? $item['long_url'] : "http://".$item['long_url'];
 							echo "<tr>";
 							echo "<td>".$item['short_url']."</td>";
-							echo "<td><a href='".$item['long_url']."' target='_blank'>".$item['long_url']."</a></td>";
+							echo "<td><a href='$long_url_item' target='_blank'>".$item['long_url']."</a></td>";
 							echo "<td>".$item['added']."</td>";
 							echo "<td>".$item['views']."</td>";
 							echo "</tr>";

@@ -3,7 +3,7 @@
 	include_once("../includes/tokens.php");
 	global $SHORT_BASE;
 
-	validate_login("add");
+	conf_validate_login("add");
 
 	$operation_failed = false;
 	$shortened = false;
@@ -18,7 +18,7 @@
 			$reason = "URL not provided";
 		}else{
 			$sqlAdd = "INSERT INTO translation (short_url, long_url) VALUES ('$short_url', '$long_url')";
-			$conn = getConnection();
+			$conn = conf_get_connection();
 			try{
 				$result = $conn->query($sqlAdd);
 				$shortened = true;
@@ -40,7 +40,7 @@
 	<!-- pbucho, 18-04-2016 -->
 	<head>
 		<title>Add URL</title>
-		<link rel="stylesheet" href="/resources/backwards.css">
+		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 	</head>

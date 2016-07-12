@@ -14,9 +14,10 @@
 
 	$DEFAULT = "/login.php";
 	$LOGIN_EXPIRY_S = 7200;
+	$TOKEN_DURATION = 15552000; // 6 months in seconds
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 
-	function getConnection(){
+	function conf_get_connection(){
 		global $server, $database, $username, $password;
 
 		$conn = new PDO("mysql:host=$server;dbname=$database", $username, $password);
@@ -24,7 +25,7 @@
 		return $conn;
 	}
 
-	function binaryToEnglish($value) {
+	function conf_bin_2_eng($value) {
 		if($value === 1){
 			return "True";
 		}else{
@@ -36,17 +37,17 @@
 	}
 
 	// from http://stackoverflow.com/a/10473026
-	function startsWith($haystack, $needle) {
+	function conf_starts_with($haystack, $needle) {
   	return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
 	}
 
-	function get_404_image() {
+	function conf_get_404_image() {
 		$sqlMaxImg = "SELECT max(id) AS max FROM 404errors";
 
-		$conn = getConnection();
+		$conn = conf_get_connection();
 		$result = $conn->query($sqlMaxImg);
 
-		$rand = rand(1, fetchLazy($result)['max']);
+		$rand = rand(1, conf_fetch_lazy($result)['max']);
 
 		$sqlGetImg = "SELECT url FROM 404errors WHERE id = $rand";
 		$sqlUpdViews = "UPDATE 404errors SET views = views + 1 WHERE id = $rand";
@@ -55,29 +56,29 @@
 		$conn->query($sqlUpdViews);
 		$conn = null;
 
-		return fetchLazy($result)['url'];
+		return conf_fetch_lazy($result)['url'];
 	}
 
-	function fetchLazy($result){
+	function conf_fetch_lazy($result){
 		return $result->fetch(PDO::FETCH_LAZY);
 	}
 
 	// this automatically checks for cookies, validates them and,
 	// if there isn't a valid session, will redirect to login
-	function validate_login($next_page){
-		$session_token = has_session();
+	function conf_validate_login($next_page){
+		$session_token = cookies_has_session();
 		if($session_token == false){
-			if($next_page == null){
+			if(is_null($next_page)){
 				header("Location: /login.php");
 			}else{
 				header("Location: /login.php?next=".$next_page);
 			}
 		}
 
-		$result = validate_token($session_token);
+		$result = tokens_validate_token($session_token);
 
 		if(!$result){
-			if($next_page == null){
+			if(is_null($next_page)){
 				header("Location: /login.php");
 			}else{
 				header("Location: /login.php?next=".$next_page);
@@ -86,7 +87,7 @@
 		return true;
 	}
 
-	function get_current_year(){
+	function conf_get_current_year(){
 		return date("Y");
 	}
 ?>

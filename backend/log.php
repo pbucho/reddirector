@@ -1,12 +1,19 @@
 <?php
 	include_once("../includes/conf.php");
-	validate_login("log");
+	include_once("../includes/cache.php");
+	include_once("../includes/roles.php");
+
+	conf_validate_login("log");
+	$session_token = cookies_has_session();
+	if(!roles_is_admin(cache_get_cached_user($session_token))){
+		header("Location: /backend/add.php");
+	}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
 		<title>Redirector access log</title>
-		<link rel="stylesheet" href="/resources/backwards.css">
+		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
@@ -29,7 +36,7 @@
 					<?php
 						global $EXT_IP_CHECK;
 						$sql = "SELECT * FROM requests";
-						$conn = getConnection();
+						$conn = conf_get_connection();
 						$result = $conn->query($sql);
 						$conn = null;
 
@@ -41,7 +48,7 @@
 							echo "<td>".$item['request']."</td>";
 							$ip = $item['ip'];
 							echo "<td><a href='".$EXT_IP_CHECK."=$ip' target='_blank'>$ip</a></td>";
-							echo "<td>".binaryToEnglish($item['ok'])."</td>";
+							echo "<td>".conf_bin_2_eng($item['ok'])."</td>";
 							echo "</tr>";
 						}
 					?>
