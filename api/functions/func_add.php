@@ -1,18 +1,13 @@
 <?php
-	include_once("../../includes/conf.php");
-	include_once("../../includes/cache.php");
-	include_once("func_authenticate.php");
-	
+	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
+	include_once($DOC_ROOT."/includes/conf.php");
+	include_once($DOC_ROOT."/includes/cache.php");
+
 	function api_add($token, $shorturl, $longurl){
-		$authentication = json_decode(api_authenticate($token), true);
-		if(!$authentication['success']){
-			return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
-		}
-		
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
-		
+
 		if(is_null($longurl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing long URL'));
 		}
@@ -35,7 +30,7 @@
 			}catch(PDOException $e){
 				$conn = null;
 				if($e->getCode() == 23000){
-					return json_encode(array('success' => false, 'reason' => 'String '.$shorturl.' already exists'));
+					return json_encode(array('success' => false, 'reason' => 'String \''.$shorturl.'\' already exists'));
 				}else{
 					return json_encode(array('success' => false, 'reason' => 'Unknown error'));
 				}
