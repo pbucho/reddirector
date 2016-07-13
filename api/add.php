@@ -6,7 +6,7 @@
 	//		shorturl : string - (if success == true) the provided short URL for confirmation
 	//		longurl : string - (if success == true) the provided long URL for confirmation
 	//		owner : string - (if success == true) the owner of the URL if the token was provided and successfully authenticated. Otherwise, owner is NULL.
-	//		reason : string - (if success == false) the reason why the authentication was not successful.
+	//		reason : string - (if success == false) the reason why the addition was not successful.
 	//		code : string - (if success == false and reason == "Unknown error") a code for error description.
 	include_once("functions/func_add.php");
 

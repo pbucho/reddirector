@@ -2,13 +2,12 @@
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once($DOC_ROOT."/includes/cache.php");
-	
+
 	function api_authenticate($token){
 		if(is_null($token)){
-			echo json_encode(array('success' => false, 'reason' => 'Missing token'));
-			die;
+			return json_encode(array('success' => false, 'reason' => 'Missing token'));
 		}
-		
+
 		$sqlValidate = "SELECT expiry, revoked FROM tokens WHERE value = '$token'";
 
 		$conn = conf_get_connection();
