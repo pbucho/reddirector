@@ -5,7 +5,7 @@
 	include_once("meta.php");
 	global $DEBUG;
 
-	if($DEBUG){
+	if($DEBUG && isset($NO_WARN) && $NO_WARN){
 		echo "<div class='alert alert-warning'>Debugging is enabled</div>";
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
