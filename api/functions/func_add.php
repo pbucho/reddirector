@@ -5,19 +5,19 @@
 	include_once("func_authenticate.php");
 
 	function api_add($token, $shorturl, $longurl){
-		if(!is_null($token)){
-			$auth = api_authenticate($token);
-			if(!json_decode($auth, true)['success']){
-				return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
-			}
-		}
-
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
 
 		if(is_null($longurl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing long URL'));
+		}
+
+		if(!is_null($token)){
+			$auth = api_authenticate($token);
+			if(!json_decode($auth, true)['success']){
+				return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
+			}
 		}
 
 		if(empty($longurl) || empty($shorturl)){

@@ -5,7 +5,7 @@
 	include_once($DOC_ROOT."/includes/cache.php");
 	include_once("func_authenticate.php");
 
-	function api_remove($token, $shorturl){
+	function api_modify($token, $shorturl, $newlongurl){
 		if(is_null($token)){
 			return json_encode(array('success' => false, 'reason' => 'Missing token'));
 		}
@@ -13,7 +13,11 @@
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
-		
+
+		if(is_null($newlongurl)){
+			return json_encode(array('success' => false, 'reason' => 'Missing new long URL'));
+		}
+
 		if(!json_decode(api_authenticate($token), true)['success']){
 			return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
 		}
@@ -28,9 +32,9 @@
 			return json_encode(array('success' => false, 'reason' => 'Unknown short URL'));
 		}
 
-		$sqlRemove = "DELETE FROM translation WHERE short_url = '$shorturl'";
+		$sqlModify = "UPDATE translation SET long_url = '$newlongurl' WHERE short_url = '$shorturl'";
 		if(roles_is_admin(cache_get_cached_user($token))){
-			$result = $conn->query($sqlRemove);
+			$result = $conn->query($sqlModify);
 			$conn = null;
 			if($result->rowCount() == 1){
 				return json_encode(array('success' => true));
@@ -45,7 +49,7 @@
 				$conn = null;
 				return json_encode(array('success' => false, 'reason' => 'Operation not allowed'));
 			}else{
-				$result = $conn->query($sqlRemove);
+				$result = $conn->query($sqlModify);
 				$conn = null;
 				if($result->rowCount() == 1){
 					return json_encode(array('success' => true));
