@@ -2,8 +2,16 @@
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once($DOC_ROOT."/includes/cache.php");
+	include_once("func_authenticate.php");
 
 	function api_add($token, $shorturl, $longurl){
+		if(!is_null($token)){
+			$auth = api_authenticate($token);
+			if(!json_decode($auth, true)['success']){
+				return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
+			}
+		}
+
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
@@ -32,7 +40,7 @@
 				if($e->getCode() == 23000){
 					return json_encode(array('success' => false, 'reason' => 'String \''.$shorturl.'\' already exists'));
 				}else{
-					return json_encode(array('success' => false, 'reason' => 'Unknown error'));
+					return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $e->getCode()));
 				}
 			}
 		}
