@@ -4,7 +4,7 @@
 
   $AUTHOR = "Pedro Bucho";
   $VERSION = "v0.3-SNAPSHOT";
-  $SDATE = "2016-07-13";
+  $SDATE = "2016-07-14";
 
   $SITE_NAME = "Reddirector";
   $SHORT_BASE = "example.com";

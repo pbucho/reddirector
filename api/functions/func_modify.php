@@ -36,11 +36,7 @@
 		if(roles_is_admin(cache_get_cached_user($token))){
 			$result = $conn->query($sqlModify);
 			$conn = null;
-			if($result->rowCount() == 1){
-				return json_encode(array('success' => true));
-			}else{
-				return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $result->errorCode()));
-			}
+			return json_encode(array('success' => true));
 		}else{
 			$sqlValidate2 = "SELECT t.short_url FROM tokens tk INNER JOIN translation t ON tk.owner = t.owner WHERE tk.value = '$token' AND t.short_url = '$shorturl'";
 			$result = $conn->query($sqlValidate2);
