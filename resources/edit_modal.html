@@ -3,7 +3,7 @@
     <div class="form-horizontal">
       <div class="modal-content">
         <div class="modal-header">
-          <button id="btn_cross" type="button" class="close" data-dismiss="modal">&times;</button>
+          <button id="ed_btn_cross" type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Edit URL</h4>
         </div>
         <div class="modal-body">
@@ -23,9 +23,9 @@
           </div>
         </div>
         <div class="modal-footer">
-          <i id="spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
-          <button id="btn_cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button id="btn_ok" type="button" class="btn btn-primary" onclick="submit()">OK</button>
+          <i id="ed_spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
+          <button id="ed_btn_cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button id="ed_btn_ok" type="button" class="btn btn-primary" onclick="submit()">OK</button>
         </div>
       </div>
     </div>
@@ -54,17 +54,17 @@
           location.reload();
         }else{
           alert("Could not edit URL: "+response['reason']);
-          $("#btn_cross").attr("disabled", false);
-          $("#btn_cancel").attr("disabled", false);
-          $("#btn_ok").attr("disabled", false);
+          $("#ed_btn_cross").attr("disabled", false);
+          $("#ed_btn_cancel").attr("disabled", false);
+          $("#ed_btn_ok").attr("disabled", false);
           $("#ed_long_url").attr("disabled", false);
           $("#spinner").hide();
         }
       }
     };
-    $("#btn_cross").attr("disabled", true);
-    $("#btn_cancel").attr("disabled", true);
-    $("#btn_ok").attr("disabled", true);
+    $("#ed_btn_cross").attr("disabled", true);
+    $("#ed_btn_cancel").attr("disabled", true);
+    $("#ed_btn_ok").attr("disabled", true);
     $("#ed_long_url").attr("disabled", true);
     $("#spinner").show();
     req.send();
