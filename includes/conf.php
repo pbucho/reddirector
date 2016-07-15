@@ -27,13 +27,13 @@
 
 	function conf_bin_2_eng($value) {
 		if($value === 1){
-			return "True";
+			return "true";
 		}else{
 			if(strcmp($value, "1") === 0){
-				return "True";
+				return "true";
 			}
 		}
-		return "False";
+		return "false";
 	}
 
 	// from http://stackoverflow.com/a/10473026

@@ -27,6 +27,11 @@
 			<h1>Redirector URL list</h1>
 			<p>Short URLs to be used in the format <code><?php echo $SHORT_BASE; ?>/string</code></p>
 			<hr/>
+			<?php
+				echo "<input type='hidden' id='is_admin' name='is_admin' value='";
+				echo conf_bin_2_eng($is_admin);
+				echo "'>";
+			?>
 			<table class="table table-hover" id="link_table">
 				<thead>
 					<tr>
@@ -79,29 +84,49 @@
 			<script type="text/javascript" src="/js/api_com.js"></script>
 			<script type="text/javascript">
 				var token = getToken();
-				$(document).ready(function() {
-					$("#link_table").DataTable( {
-						"ajax": {
-							"url": token == null ? '/api/listall.php' : '/api/listall.php?token='+token,
-							//"url": '/api/listall.php?token='+token,
-							"dataSrc": "items"
-						},
-						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-						"order": [[ 2, "desc" ]],
-						"columns": [
-							{ data: "string" },
-							{ data: "longurl" },
-							{ data: "dateadded" },
-							{ data: "views" },
-							{ data: "owner" }
-						],
-						"columnDefs": [ {
-							"targets": this.columns().header().length - 1,
-							"data": null,
-							"defaultContent": "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal' onclick=\"setEditFields()\"><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal' onclick=\"setConfirmFields()\"><span class='fa fa-trash-o'></span></button>"
-						}]
+				var isAdmin = $("#is_admin").val() == "true" ? true : false;
+				if(!isAdmin){
+					$(document).ready(function() {
+						$("#link_table").DataTable( {
+							"ajax": {
+								"url": token == null ? '/api/listall.php' : '/api/listall.php?token='+token,
+								"dataSrc": "items"
+							},
+							"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+							"order": [[ 2, "desc" ]],
+							"columns": [
+								{ data: "string" },
+								{ data: "longurl" },
+								{ data: "dateadded" },
+								{ data: "views" }
+							]
+						});
 					});
-				});
+				}else{
+					$(document).ready(function(){
+						$("#link_table").DataTable({
+							"ajax": {
+								"url": '/api/listall.php?token='+token,
+								"dataSrc": "items"
+							},
+							"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+							"order": [[ 2, "desc" ]],
+							"columns": [
+								{ data: "string" },
+								{ data: "longurl" },
+								{ data: "dateadded" },
+								{ data: "views" },
+								{ data: "owner" },
+								{ data: null }
+							],
+							"columnDefs": [{
+								"target": 5,
+								"data": null,
+								"defaultContent": "button"
+							}]
+						});
+					});
+				}
 			</script>
 			<script type="text/javascript">
 				function setEditFields(long_url, short_url) {
