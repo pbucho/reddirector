@@ -14,6 +14,7 @@
 <html lang="en">
 	<head>
 		<title>Redirector URL list</title>
+		<meta charset="utf-8">
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
