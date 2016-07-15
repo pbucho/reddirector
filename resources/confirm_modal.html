@@ -14,7 +14,7 @@
         <div class="modal-footer">
           <i id="conf_spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
           <button id="conf_btn_cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button id="conf_btn_ok" type="submit" class="btn btn-danger" onclick="submit()">OK</button>
+          <button id="conf_btn_ok" type="submit" class="btn btn-danger" onclick="submitDelete()">OK</button>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
 </div>
 <script type="text/javascript" src="/js/api_com.js"></script>
 <script type="text/javascript">
-  function submit() {
+  function submitDelete() {
     var token = getToken();
     if(token == null) {
       alert("An error occurred. Please log in again.");

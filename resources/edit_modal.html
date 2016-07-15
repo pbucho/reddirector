@@ -25,7 +25,7 @@
         <div class="modal-footer">
           <i id="ed_spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
           <button id="ed_btn_cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button id="ed_btn_ok" type="button" class="btn btn-primary" onclick="submit()">OK</button>
+          <button id="ed_btn_ok" type="button" class="btn btn-primary" onclick="submitEdit()">OK</button>
         </div>
       </div>
     </div>
@@ -35,10 +35,10 @@
 <script type="text/javascript">
   $("#ed_long_url").keyup(function(event){
     if(event.keyCode == 13){
-      submit();
+      submitEdit();
     }
   });
-  function submit() {
+  function submitEdit() {
     var token = getToken();
     if(token == null) {
       alert("An error occurred. Please log in again.");
