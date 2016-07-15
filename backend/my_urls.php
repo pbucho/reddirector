@@ -2,7 +2,6 @@
 	include_once("../includes/conf.php");
 	include_once("../includes/cookies.php");
 	include_once("../includes/cache.php");
-	global $SHORT_BASE;
 
 	conf_validate_login("my_urls");
 	$session_token = cookies_has_session();
@@ -25,7 +24,7 @@
 		<?php include("../resources/top_menu.php"); ?>
 		<div class="container">
 			<h1>My URLs</h1>
-			<p>Short URLs to be used in the format <code><?php echo $SHORT_BASE; ?>/string</code></p>
+			<?php include("../resources/addition_header.php"); ?>
 			<hr/>
 			<table class="table table-hover" id="link_table">
 				<thead>
@@ -78,6 +77,7 @@
 		</div>
 		<?php
 			include("../resources/footer.php");
+			include("../resources/add_modal.html");
 			include("../resources/edit_modal.html");
 			include("../resources/confirm_modal.html");
 		?>

@@ -17,7 +17,6 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/list.php">List</a></li>
-      <li><a href="/backend/add.php">Add URL</a></li>
 			<?php
 	  		if($session_token != false){
 					echo "<li><a href='/backend/my_urls.php'>My URLs</a></li>";

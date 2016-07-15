@@ -1,0 +1,80 @@
+<div id="add_modal" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="form-horizontal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button id="add_btn_cross" type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add URL</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="long_url">Long URL:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="add_long_url" name="long_url" placeholder="Long URL" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="short_url">String:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="add_short_url" name="short_url" placeholder="String">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <i id="add_spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
+          <button id="add_btn_cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button id="add_btn_ok" type="button" class="btn btn-primary" onclick="submitAdd()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/js/api_com.js"></script>
+<script type="text/javascript">
+  $("#add_long_url").keyup(function(event){
+    if(event.keyCode == 13){
+      submitAdd();
+    }
+  });
+  $("#add_short_url").keyup(function(event){
+    if(event.keyCode == 13){
+      submitAdd();
+    }
+  });
+  function submitAdd() {
+    var token = getToken();
+    if(token == null) {
+      alert("An error occurred. Please log in again.");
+      return;
+    }
+    var req = new XMLHttpRequest();
+    var connection = "/api/add.php?token="+token+"&shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val());
+    req.open("GET", connection, true);
+    req.onreadystatechange = function() {
+      if(req.readyState == 4 && req.status == 200){
+        var response = JSON.parse(req.responseText);
+        if(response['success']){
+          location.reload();
+        }else{
+          alert("Could not add URL: "+response['reason']);
+          disableElementsAdd(false);
+        }
+      }
+    };
+    disableElementsAdd(true);
+    req.send();
+  }
+  $(document).ready(function(){
+	disableElementsAdd(false);
+	$("#add_long_url").val("");
+	$("#add_short_url").val("");
+  });
+  function disableElementsAdd(value){
+	$("#add_btn_cross").attr("disabled", value);
+	$("#add_btn_cancel").attr("disabled", value);
+	$("#add_btn_ok").attr("disabled", value);
+	$("#add_long_url").attr("disabled", value);
+	$("#add_short_url").attr("disabled", value);
+	value ? $("#spinner").show() : $("#spinner").hide();
+  }
+</script>
