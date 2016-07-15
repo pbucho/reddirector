@@ -34,7 +34,7 @@
 					if(roles_is_admin(cache_get_cached_user($session_token))){
 						echo "<li><a><b><kbd>admin</kbd></b></a></li>";
 					}
-          echo "<li><a>".cache_get_cached_user($session_token)."</a></li>";
+          echo "<li><a href='/backend/control_panel.php'>".cache_get_cached_user($session_token)."</a></li>";
           echo "<li><a href='/logout.php'><span class='glyphicon glyphicon-log-out'></span> Logout</a></li>";
         }
       ?>
