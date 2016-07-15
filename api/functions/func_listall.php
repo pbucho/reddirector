@@ -14,7 +14,7 @@
 				return json_encode(array('success' => false, 'reason' => 'Invalid limits'));
 			}
 		}
-		
+
 		$sqlList = "SELECT short_url, long_url, added, views, u.name AS owner FROM translation t LEFT JOIN users u ON t.owner = u.id";
 		if(!is_null($minlim) && !is_null($maxlim)){
 			$sqlList = $sqlList." LIMIT $minlim , $maxlim";
@@ -22,11 +22,11 @@
 		$conn = conf_get_connection();
 		try{
 			$result = $conn->query($sqlList);
-			$conn = null;			
+			$conn = null;
 			$response_array = array('success' => true, 'items' => array());
-			
+
 			foreach($result as $item){
-				$item_response = array('shorturl' => $item['short_url'], 'longurl' => $item['long_url'], 'added' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']);
+				$item_response = array('string' => $item['short_url'], 'longurl' => $item['long_url'], 'dateadded' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']);
 				if(!is_null($token) && json_decode(api_authenticate($token), true)['success']){
 					if(roles_is_admin(cache_get_cached_user($token))){
 						$item_response['owner'] = $item['owner'];

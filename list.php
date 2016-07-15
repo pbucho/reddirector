@@ -44,7 +44,7 @@
 				</thead>
 				<tbody>
 					<?php
-						$sql = "SELECT short_url, long_url, added, views, u.name AS owner FROM translation t LEFT JOIN users u ON t.owner = u.id";
+						/*$sql = "SELECT short_url, long_url, added, views, u.name AS owner FROM translation t LEFT JOIN users u ON t.owner = u.id";
 						$conn = conf_get_connection();
 						$result = $conn->query($sql);
 						$conn = null;
@@ -66,7 +66,7 @@
 								echo "</td>";
 							}
 							echo "</tr>";
-						}
+						}*/
 					?>
 				</tbody>
 			</table>
@@ -76,12 +76,30 @@
 			</script>
 			<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js">
 			</script>
-
+			<script type="text/javascript" src="/js/api_com.js"></script>
 			<script type="text/javascript">
+				var token = getToken();
 				$(document).ready(function() {
-					$("#link_table").dataTable( {
+					$("#link_table").DataTable( {
+						"ajax": {
+							"url": token == null ? '/api/listall.php' : '/api/listall.php?token='+token,
+							//"url": '/api/listall.php?token='+token,
+							"dataSrc": "items"
+						},
 						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
-						"order": [[ 2, "desc" ]]
+						"order": [[ 2, "desc" ]],
+						"columns": [
+							{ data: "string" },
+							{ data: "longurl" },
+							{ data: "dateadded" },
+							{ data: "views" },
+							{ data: "owner" }
+						],
+						"columnDefs": [ {
+							"targets": this.columns().header().length - 1,
+							"data": null,
+							"defaultContent": "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal' onclick=\"setEditFields()\"><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal' onclick=\"setConfirmFields()\"><span class='fa fa-trash-o'></span></button>"
+						}]
 					});
 				});
 			</script>
