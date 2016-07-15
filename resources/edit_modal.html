@@ -54,19 +54,21 @@
           location.reload();
         }else{
           alert("Could not edit URL: "+response['reason']);
-          $("#ed_btn_cross").attr("disabled", false);
-          $("#ed_btn_cancel").attr("disabled", false);
-          $("#ed_btn_ok").attr("disabled", false);
-          $("#ed_long_url").attr("disabled", false);
-          $("#spinner").hide();
+          disableElementsEdit(false);
         }
       }
     };
-    $("#ed_btn_cross").attr("disabled", true);
-    $("#ed_btn_cancel").attr("disabled", true);
-    $("#ed_btn_ok").attr("disabled", true);
-    $("#ed_long_url").attr("disabled", true);
-    $("#spinner").show();
+    disableElementsEdit(true);
     req.send();
+  }
+  $(document).ready(function(){
+	disableElementsEdit(false);
+  });
+  function disableElementsEdit(value){
+	$("#ed_btn_cross").attr("disabled", value);
+	$("#ed_btn_cancel").attr("disabled", value);
+	$("#ed_btn_ok").attr("disabled", value);
+	$("#ed_long_url").attr("disabled", value);
+	value ? $("#spinner").show() : $("#spinner").hide();
   }
 </script>

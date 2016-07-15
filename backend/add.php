@@ -80,7 +80,7 @@
 								echo "value='$long_url'";
 							}
 						?>
-						required>
+						required autofocus>
 					</div>
 				</div>
 				<div class="form-group">

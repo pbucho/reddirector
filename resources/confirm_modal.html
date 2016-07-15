@@ -38,17 +38,20 @@
           location.reload();
         }else{
           alert("Could not edit URL: "+response['reason']);
-          $("#conf_btn_cross").attr("disabled", false);
-          $("#conf_btn_cancel").attr("disabled", false);
-          $("#conf_btn_ok").attr("disabled", false);
-          $("#conf_spinner").hide();
+          disableElementsConfirm(false);
         }
       }
     };
-    $("#conf_btn_cross").attr("disabled", true);
-    $("#conf_btn_cancel").attr("disabled", true);
-    $("#conf_btn_ok").attr("disabled", true);
-    $("#conf_spinner").show();
+    disableElementsConfirm(true)
     req.send();
+	$(document).ready(function(){
+		disableElementsConfirm(false);
+	});
+  }
+  function disableElementsConfirm(value){
+	$("#conf_btn_cross").attr("disabled", value);
+	$("#conf_btn_cancel").attr("disabled", value);
+	$("#conf_btn_ok").attr("disabled", value);
+	value ? $("#conf_spinner").show() : $("#conf_spinner").hide();
   }
 </script>

@@ -1,6 +1,5 @@
 <?php
 	include_once("includes/conf.php");
-	include_once("includes/meta.php");
 	include_once("includes/cookies.php");
 	include_once("includes/cache.php");
 	include_once("includes/roles.php");
@@ -28,11 +27,7 @@
 			<h1>Redirector URL list</h1>
 			<p>Short URLs to be used in the format <code><?php echo $SHORT_BASE; ?>/string</code></p>
 			<hr/>
-			<?php
-				echo "<input type='hidden' id='is_admin' name='is_admin' value='";
-				echo conf_bin_2_eng($is_admin);
-				echo "'>";
-			?>
+			<?php echo "<input type='hidden' id='is_admin' name='is_admin' value='".conf_bin_2_eng($is_admin)."'>"; ?>
 			<table class="table table-hover" id="link_table">
 				<thead>
 					<tr>
@@ -48,33 +43,7 @@
 						?>
 					</tr>
 				</thead>
-				<tbody>
-					<?php
-						/*$sql = "SELECT short_url, long_url, added, views, u.name AS owner FROM translation t LEFT JOIN users u ON t.owner = u.id";
-						$conn = conf_get_connection();
-						$result = $conn->query($sql);
-						$conn = null;
-
-						$result = $result->fetchAll();
-
-						foreach($result as $item){
-							$long_url_item = conf_starts_with($item['long_url'], "http://") || conf_starts_with($item['long_url'], "https://") ? $item['long_url'] : "http://".$item['long_url'];
-							echo "<tr>";
-							echo "<td>".$item['short_url']."</td>";
-							echo "<td><a href='$long_url_item' target='_blank'>".$item['long_url']."</a></td>";
-							echo "<td>".$item['added']."</td>";
-							echo "<td>".$item['views']."</td>";
-							if($is_admin){
-								echo "<td>".(is_null($item['owner']) ? "-" : $item['owner'])."</td>";
-								echo "<td style='text-align: center'>";
-								echo "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal' onclick=\"setEditFields('".$item['long_url']."','".$item['short_url']."')\"><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;";
-								echo "<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal' onclick=\"setConfirmFields('".$item['short_url']."')\"><span class='fa fa-trash-o'></span></button>";
-								echo "</td>";
-							}
-							echo "</tr>";
-						}*/
-					?>
-				</tbody>
+				<tbody></tbody>
 			</table>
 			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js">
 			</script>
@@ -130,8 +99,6 @@
 						setConfirmFields(data['string']);
 					});
 				});
-			</script>
-			<script type="text/javascript">
 				function setEditFields(short_url, long_url) {
 					$("#ed_short_url").val(short_url);
 					$("#ed_long_url").val(long_url);
@@ -143,8 +110,8 @@
 				}
 			</script>
 		</div>
-		<?php include("./resources/footer.php"); ?>
 		<?php
+			include("./resources/footer.php");
 			include("./resources/edit_modal.html");
 			include("./resources/confirm_modal.html");
 		?>
