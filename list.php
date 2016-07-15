@@ -99,15 +99,6 @@
 						setConfirmFields(data['string']);
 					});
 				});
-				function setEditFields(short_url, long_url) {
-					$("#ed_short_url").val(short_url);
-					$("#ed_long_url").val(long_url);
-					$("#ed_short_url_disabled").val(short_url);
-				}
-				function setConfirmFields(short_url) {
-					$("#conf_short_url").val(short_url);
-					$("#conf_show_url").html(short_url);
-				}
 			</script>
 		</div>
 		<?php

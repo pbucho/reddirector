@@ -34,7 +34,7 @@
 			$response_array = array('success' => true, 'items' => array());
 			
 			foreach($result as $item){
-				array_push($response_array['items'], array('shorturl' => $item['short_url'], 'longurl' => $item['long_url'], 'added' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']));
+				array_push($response_array['items'], array('string' => $item['short_url'], 'longurl' => $item['long_url'], 'dateadded' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']));
 			}
 			return json_encode($response_array);
 		}catch(PDOException $e){
