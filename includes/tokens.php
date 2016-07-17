@@ -1,5 +1,6 @@
 <?php
 	include_once("conf.php");
+	include_once("cache.php");
 
 	// this will check for token existence and validity (i.e.: not expired nor revoked)
 	function tokens_validate_token($token){
@@ -70,6 +71,16 @@
 		$sqlRev = "UPDATE tokens SET revoked = '1' WHERE owner = '$userid'";
 		$conn->query($sqlRev);
 		$conn = null;
+	}
+	
+	function tokens_get_active_sessions($user){
+		$user_id = cache_get_cached_user_id($user);
+		$sqlSessions = "SELECT count(*) AS sessions FROM tokens WHERE revoked <> 1 AND expiry > noW() AND owner = '$user_id'";
+		$conn = conf_get_connection();
+		$result = $conn->query($sqlSessions);
+		$conn = null;
+		$result = conf_fetch_lazy($result);
+		return $result['sessions'];
 	}
 
 ?>

@@ -1,6 +1,6 @@
 Changelog
 =========
-[0.3-SNAPSHOT] 2016-07-14
+[0.3-SNAPSHOT] 2016-07-17
 -------------------------
 ### Added
 - User name caching
@@ -13,6 +13,7 @@ Changelog
 - API
 - Admin control over all strings
 - Requests made via AJAX
+- Added user control panel
 
 ### Changed
 - Log is now accessible only to users with `admin` role
