@@ -12,7 +12,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>My URLs</title>
+		<title>Control panel</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -42,6 +42,13 @@
 							$conn = null;
 							$result = conf_fetch_lazy($result);
 							echo $result['registered'];
+						?>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-2"><b>Current IP</b></td><td class="col-sm-10">
+						<?php
+							echo $_SERVER['REMOTE_ADDR'];
 						?>
 						</td>
 					</tr>

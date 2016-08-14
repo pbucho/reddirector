@@ -75,9 +75,9 @@
 	
 	function tokens_revoke_all_but_this_token($token){
 		$user_id = cache_get_cached_user_id($token);
-		$sqlRevok = "DELETE FROM tokens WHERE value <> '$token' AND owner = '$user_id'";
+		$sqlRevok = "DELETE FROM tokens WHERE value <> '$token' AND owner = $user_id";
 		$conn = conf_get_connection();
-		$result = $conn->query($conn);
+		$result = $conn->query($sqlRevok);
 		$conn = null;
 	}
 	
