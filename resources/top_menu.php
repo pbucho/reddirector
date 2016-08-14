@@ -23,6 +23,7 @@
 				}
 				if($roles_is_admin){
 					echo "<li><a href='/backend/access_log.php'>Access log</a></li>";
+					echo "<li><a href='/backend/action_log.php'>Action log</a></li>";
 				}
 			?>
     </ul>
