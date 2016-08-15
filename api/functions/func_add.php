@@ -2,9 +2,11 @@
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once($DOC_ROOT."/includes/cache.php");
+	include_once($DOC_ROOT."/includes/logger.php");
 	include_once("func_authenticate.php");
 
 	function api_add($token, $shorturl, $longurl){
+		global $ACTION_ADD_URL;
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
@@ -34,6 +36,7 @@
 			try{
 				$result = $conn->query($sqlAdd);
 				$conn = null;
+				logger_log_action($userid, $ACTION_ADD_URL, null, $shorturl." &rarr; ".$longurl);
 				return json_encode(array('success' => true, 'shorturl' => $shorturl, 'longurl' => $longurl, 'owner' => cache_get_cached_user($token)));
 			}catch(PDOException $e){
 				$conn = null;

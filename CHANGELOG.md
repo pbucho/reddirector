@@ -14,6 +14,7 @@ Changelog
 - Admin control over all strings
 - Requests made via AJAX
 - Added user control panel
+- Added action log
 
 ### Changed
 - Log is now accessible only to users with `admin` role

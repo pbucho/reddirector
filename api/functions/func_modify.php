@@ -3,9 +3,11 @@
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once($DOC_ROOT."/includes/roles.php");
 	include_once($DOC_ROOT."/includes/cache.php");
+	include_once($DOC_ROOT."/includes/logger.php");
 	include_once("func_authenticate.php");
 
 	function api_modify($token, $shorturl, $newlongurl){
+		global $ACTION_MOD_URL;
 		if(is_null($token)){
 			return json_encode(array('success' => false, 'reason' => 'Missing token'));
 		}
@@ -23,7 +25,7 @@
 		}
 
 		$conn = conf_get_connection();
-		$sqlValidate1 = "SELECT short_url FROM translation WHERE short_url = '$shorturl'";
+		$sqlValidate1 = "SELECT short_url, long_url FROM translation WHERE short_url = '$shorturl'";
 		$result = $conn->query($sqlValidate1);
 		$result = conf_fetch_lazy($result);
 
@@ -33,9 +35,12 @@
 		}
 
 		$sqlModify = "UPDATE translation SET long_url = '$newlongurl' WHERE short_url = '$shorturl'";
+		$userid = cache_get_cached_user_id($token);
+		$oldlongurl = $result['long_url'];
 		if(roles_is_admin(cache_get_cached_user($token))){
 			$result = $conn->query($sqlModify);
 			$conn = null;
+			logger_log_action($userid, $ACTION_MOD_URL, $shorturl." &rarr; ".$oldlongurl, $shorturl." &rarr; ".$newlongurl);
 			return json_encode(array('success' => true));
 		}else{
 			$sqlValidate2 = "SELECT t.short_url FROM tokens tk INNER JOIN translation t ON tk.owner = t.owner WHERE tk.value = '$token' AND t.short_url = '$shorturl'";
@@ -48,6 +53,7 @@
 				$result = $conn->query($sqlModify);
 				$conn = null;
 				if($result->rowCount() == 1){
+					logger_log_action($userid, $ACTION_MOD_URL, $shorturl." &rarr; ".$oldlongurl, $shorturl." &rarr; ".$newlongurl);
 					return json_encode(array('success' => true));
 				}else{
 					return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $result->errorCode()));

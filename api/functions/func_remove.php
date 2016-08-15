@@ -3,9 +3,11 @@
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once($DOC_ROOT."/includes/roles.php");
 	include_once($DOC_ROOT."/includes/cache.php");
+	include_once($DOC_ROOT."/includes/logger.php");
 	include_once("func_authenticate.php");
 
 	function api_remove($token, $shorturl){
+		global $ACTION_DEL_URL;
 		if(is_null($token)){
 			return json_encode(array('success' => false, 'reason' => 'Missing token'));
 		}
@@ -13,13 +15,13 @@
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
-		
+
 		if(!json_decode(api_authenticate($token), true)['success']){
 			return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
 		}
 
 		$conn = conf_get_connection();
-		$sqlValidate1 = "SELECT short_url FROM translation WHERE short_url = '$shorturl'";
+		$sqlValidate1 = "SELECT short_url, long_url FROM translation WHERE short_url = '$shorturl'";
 		$result = $conn->query($sqlValidate1);
 		$result = conf_fetch_lazy($result);
 
@@ -29,10 +31,13 @@
 		}
 
 		$sqlRemove = "DELETE FROM translation WHERE short_url = '$shorturl'";
+		$userid = cache_get_cached_user_id($token);
+		$longurl = $result['long_url'];
 		if(roles_is_admin(cache_get_cached_user($token))){
 			$result = $conn->query($sqlRemove);
 			$conn = null;
 			if($result->rowCount() == 1){
+				logger_log_action($userid, $ACTION_DEL_URL, $shorturl." &rarr; ".$longurl, null);
 				return json_encode(array('success' => true));
 			}else{
 				return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $result->errorCode()));
@@ -48,6 +53,7 @@
 				$result = $conn->query($sqlRemove);
 				$conn = null;
 				if($result->rowCount() == 1){
+					logger_log_action($userid, $ACTION_DEL_URL, $shorturl." &rarr; ".$longurl, null);
 					return json_encode(array('success' => true));
 				}else{
 					return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $result->errorCode()));
