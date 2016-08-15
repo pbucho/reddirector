@@ -2,7 +2,7 @@
 	include_once("../includes/conf.php");
 	include_once("../includes/cookies.php");
 	include_once("../includes/cache.php");
-	
+
 	conf_validate_login("control_panel");
 	$session_token = cookies_has_session();
 	$cuser = cache_get_cached_user($session_token);
@@ -19,7 +19,7 @@
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
-		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
