@@ -18,7 +18,7 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
@@ -59,7 +59,7 @@
 			<script type="text/javascript" src="/js/jquery.js">
 			</script>
 			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
-			<script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.js">
+			<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js">
 			</script>
 
 			<script type="text/javascript">

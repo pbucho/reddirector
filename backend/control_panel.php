@@ -2,12 +2,13 @@
 	include_once("../includes/conf.php");
 	include_once("../includes/cookies.php");
 	include_once("../includes/cache.php");
+	include_once("../includes/tokens.php");
 
 	conf_validate_login("control_panel");
 	$session_token = cookies_has_session();
 	$cuser = cache_get_cached_user($session_token);
 	$user_id = cache_get_cached_user_id($session_token);
-	$active_sessions = tokens_get_active_sessions($user);
+	$active_sessions = tokens_get_active_sessions($cuser);
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -18,7 +19,6 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
 	</head>
 	<body>

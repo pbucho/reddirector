@@ -72,7 +72,7 @@
 		$conn->query($sqlRev);
 		$conn = null;
 	}
-	
+
 	function tokens_revoke_all_but_this_token($token){
 		$user_id = cache_get_cached_user_id($token);
 		$sqlRevok = "DELETE FROM tokens WHERE value <> '$token' AND owner = $user_id";
@@ -80,10 +80,10 @@
 		$result = $conn->query($sqlRevok);
 		$conn = null;
 	}
-	
+
 	function tokens_get_active_sessions($user){
 		$user_id = cache_get_cached_user_id($user);
-		$sqlSessions = "SELECT count(*) AS sessions FROM tokens WHERE revoked <> 1 AND expiry > noW() AND owner = '$user_id'";
+		$sqlSessions = "SELECT count(*) AS sessions FROM tokens WHERE revoked <> 1 AND expiry > now() AND owner = '$user_id'";
 		$conn = conf_get_connection();
 		$result = $conn->query($sqlSessions);
 		$conn = null;
