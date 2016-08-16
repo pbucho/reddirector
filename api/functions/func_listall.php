@@ -3,6 +3,7 @@
 	include_once($DOC_ROOT."/includes/base.php");
 	include_once($DOC_ROOT."/includes/cache.php");
 	include_once($DOC_ROOT."/includes/roles.php");
+	include_once($DOC_ROOT."/includes/conf.php");
 	include_once("func_authenticate.php");
 
 	function api_listall($token, $minlim, $maxlim){
@@ -37,7 +38,11 @@
 			return json_encode($response_array);
 		}catch(PDOException $e){
 			$conn = null;
-			return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $e->getCode()));
+			$response_array = array('success' => false, 'reason' => 'Unknown error', 'code' => $e->getCode());
+			if($DEBUG){
+				array_push($response_array['message'], $e->getMessage());
+			}
+			return json_encode($response_array);
 		}
 	}
 ?>
