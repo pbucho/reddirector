@@ -7,6 +7,7 @@
 	include_once("func_authenticate.php");
 
 	function api_listall($token, $minlim, $maxlim){
+		global $DEBUG;
 		if(!is_null($minlim) || !is_null($maxlim)){
 			if(is_null($maxlim) || is_null($minlim)){
 				return json_encode(array('success' => false, 'reason' => 'Missing minimum or maximum limit'));

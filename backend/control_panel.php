@@ -63,26 +63,26 @@
 				</table>
 			</div>
 			<div class="col-sm-6">
-				<h2>Password</h2>
+				<h2>Password (NYI)</h2>
 				<form class="form-horizontal" role="form">
 					<table class="table">
 						<tr>
 							<td class="col-sm-4"><b>Old password</b></td><td class="col-sm-8">
-								<div class="form-group"><input type="password" class="form-control" id="old_password" name="old_password"></div>
+								<div class="form-group"><abbr title="This feature is not yet implemented"><input type="password" class="form-control" id="old_password" name="old_password" disabled></abbr></div>
 							</td>
 						</tr>
 						<tr>
 							<td class="col-sm-4"><b>New password</b></td><td class="col-sm-8">
-								<div class="form-group"><input type="password" class="form-control" id="new_password" name="new_password"></div>
+								<div class="form-group"><abbr title="This feature is not yet implemented"><input type="password" class="form-control" id="new_password" name="new_password" disabled></abbr></div>
 							</td>
 						</tr>
 						<tr>
 							<td class="col-sm-4"><b>Confirm new password</b></td><td class="col-sm-8">
-								<div class="form-group"><input type="password" class="form-control" id="confirm_new_password" name="confirm_new_password"></div>
+								<div class="form-group"><abbr title="This feature is not yet implemented"><input type="password" class="form-control" id="confirm_new_password" name="confirm_new_password" disabled></abbr></div>
 							</td>
 						</tr>
 					</table>
-					<input type="submit" class="btn btn-primary" value="Change password">
+					<abbr title="This feature is not yet implemented"><input type="submit" class="btn btn-primary" value="Change password" disabled="true"></abbr>
 				</form>
 			</div>
 			<br/>

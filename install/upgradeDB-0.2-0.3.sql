@@ -1,3 +1,6 @@
+ALTER TABLE `redirect`.`translation` ADD owner int;
+ALTER TABLE `redirect`.`translation` ADD FOREIGN KEY (owner) REFERENCES `redirect`.`users` (id);
+
 CREATE TABLE `redirect`.`roles` (
     user_id int NOT NULL,
     role_id int NOT NULL,
