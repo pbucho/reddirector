@@ -12,7 +12,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>Redirector access log</title>
+		<title>Access log</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -23,7 +23,7 @@
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
 		<div class="container">
-			<h1>Redirector access log</h1>
+			<h1>Access log</h1>
 			<hr/>
 			<table class="table table-hover" id="link_table">
 				<thead>

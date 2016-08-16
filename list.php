@@ -11,7 +11,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title>Redirector URL list</title>
+		<title>URL list</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -23,7 +23,7 @@
 	<body>
 		<?php include("resources/top_menu.php"); ?>
 		<div class="container">
-			<h1>Redirector URL list</h1>
+			<h1>URL list</h1>
 			<?php include("resources/addition_header.php"); ?>
 			<hr/>
 			<?php echo "<input type='hidden' id='is_admin' name='is_admin' value='".base_bin_2_eng($is_admin)."'>"; ?>
