@@ -25,14 +25,14 @@
 		<div class="container">
 			<h1>Action log</h1>
 			<hr/>
-			<table class="table table-hover" id="link_table">
+			<table class="table table-hover" id="link_table" style="table-layout: fixed; width: 100%; word-wrap: break-word">
 				<thead>
 					<tr>
-						<th>Timestamp</th>
-						<th>User</th>
-						<th>Action</th>
-						<th>Old value</th>
-						<th>New value</th>
+						<th style="width: 10%">Timestamp</th>
+						<th style="width: 10%">User</th>
+						<th style="width: 10%">Action</th>
+						<th style="width: 35%">Old value</th>
+						<th style="width: 35%">New value</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,7 +49,6 @@
 							echo "<td>".$item['ts']."</td>";
 							echo "<td>".$item['username']."</td>";
 							echo "<td>".$item['action']."</td>";
-							//echo $item['old_value'] == null ? "NULL" : $item['old_value'];
 							echo "<td>".($item['old_value'] == null ? "-" : $item['old_value'])."</td>";
 							echo "<td>".($item['new_value'] == null ? "-" : $item['new_value'])."</td>";
 							echo "</tr>";

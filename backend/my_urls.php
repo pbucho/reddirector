@@ -26,14 +26,14 @@
 			<h1>My URLs</h1>
 			<?php include("../resources/addition_header.php"); ?>
 			<hr/>
-			<table class="table table-hover" id="link_table">
+			<table class="table table-hover" id="link_table" style="table-layout: fixed; width: 100%; word-wrap: break-word">
 				<thead>
 					<tr>
-						<th>String</th>
-						<th>Long URL</th>
-						<th>Date added</th>
-						<th>Views</th>
-						<th>Actions</th>
+						<th style="width: 20%">String</th>
+						<th style="width: 50%">Long URL</th>
+						<th style="width: 10%">Date added</th>
+						<th style="width: 10%">Views</th>
+						<th style="width: 10%">Actions</th>
 					</tr>
 				</thead>
 				<tbody></tbody>

@@ -27,17 +27,17 @@
 			<?php include("resources/addition_header.php"); ?>
 			<hr/>
 			<?php echo "<input type='hidden' id='is_admin' name='is_admin' value='".base_bin_2_eng($is_admin)."'>"; ?>
-			<table class="table table-hover" id="link_table">
+			<table class="table table-hover" id="link_table" style="table-layout: fixed; width: 100%; word-wrap: break-word">
 				<thead>
 					<tr>
-						<th>String</th>
-						<th>Long URL</th>
-						<th>Date added</th>
-						<th>Views</th>
+						<th style="width: 10%">String</th>
+						<th style="width: 50%">Long URL</th>
+						<th style="width: 10%">Date added</th>
+						<th style="width: 5%">Views</th>
 						<?php
 							if($is_admin){
-								echo "<th>Owner</th>";
-								echo "<th>Admin actions</th>";
+								echo "<th style=\"width: 15%\">Owner</th>";
+								echo "<th style=\"width: 10%\">Admin actions</th>";
 							}
 						?>
 					</tr>

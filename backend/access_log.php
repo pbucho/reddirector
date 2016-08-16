@@ -25,13 +25,13 @@
 		<div class="container">
 			<h1>Access log</h1>
 			<hr/>
-			<table class="table table-hover" id="link_table">
+			<table class="table table-hover" id="link_table" style="table-layout: fixed; width: 100%; word-wrap: break-word">
 				<thead>
 					<tr>
-						<th>Access date</th>
-						<th>Requested string</th>
-						<th>IP address</th>
-						<th>Success</th>
+						<th style="width: 25%">Access date</th>
+						<th style="width: 50%">Requested string</th>
+						<th style="width: 13%">IP address</th>
+						<th style="width: 12%">Success</th>
 					</tr>
 				</thead>
 				<tbody>
