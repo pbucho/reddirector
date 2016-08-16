@@ -1,5 +1,5 @@
 <?php
-	include_once("includes/conf.php");
+	include_once("includes/base.php");
 	include_once("includes/tokens.php");
 	include_once("includes/cookies.php");
 

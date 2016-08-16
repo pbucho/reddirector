@@ -1,5 +1,5 @@
 <?php
-  include_once("conf.php");
+  include_once("base.php");
 
   function roles_is_admin($user){
     if(is_null($user) || $user == false){
@@ -7,7 +7,7 @@
     }
 
     $sqlRoleAdmin = "SELECT role_id FROM roles r INNER JOIN users u ON r.user_id = u.id WHERE u.name = '$user'";
-    $conn = conf_get_connection();
+    $conn = base_get_connection();
     $result = $conn->query($sqlRoleAdmin);
     $conn = null;
 

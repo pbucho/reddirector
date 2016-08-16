@@ -1,6 +1,6 @@
 <?php
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
-	include_once($DOC_ROOT."/includes/conf.php");
+	include_once($DOC_ROOT."/includes/base.php");
 	include_once($DOC_ROOT."/includes/cache.php");
 	include_once($DOC_ROOT."/includes/roles.php");
 	include_once("func_authenticate.php");
@@ -19,7 +19,7 @@
 		if(!is_null($minlim) && !is_null($maxlim)){
 			$sqlList = $sqlList." LIMIT $minlim , $maxlim";
 		}
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		try{
 			$result = $conn->query($sqlList);
 			$conn = null;

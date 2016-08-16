@@ -1,5 +1,5 @@
 <?php
-	include_once("conf.php");
+	include_once("base.php");
 
 	function cookies_cookies_create_or_update_cookie_no_exp($name, $value){
 		$exp = time() + (62208000); // 2yrs

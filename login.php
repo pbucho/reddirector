@@ -1,5 +1,5 @@
 <?php
-	include_once("includes/conf.php");
+	include_once("includes/base.php");
 	include_once("includes/tokens.php");
 	include_once("includes/cookies.php");
 
@@ -24,10 +24,10 @@
 		$upassword = $_POST['password'];
 
 		$sqlPswd = "SELECT password FROM users WHERE name = '$cuser'";
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlPswd);
 		$conn = null;
-		$result = conf_fetch_lazy($result);
+		$result = base_fetch_lazy($result);
 
 		$stored_pswd = $result['password'];
 

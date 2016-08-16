@@ -1,11 +1,15 @@
 <?php
 
+	/* This is an example configuration file.
+	 * Change the settings accordingly and rename the file to 'conf.php'
+	 */
+
 	// DATABASE CONFIGURATION
 	
 	$server = "localhost";
 	$database = "redirect";
 	$username = "root";
-	$password = "SM901n";
+	$password = "root";
 	
 	// SERVICE INFORMATION
 
@@ -20,9 +24,9 @@
 	$TOKEN_DURATION = 86400; // 24hrs in seconds
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
 	$SITE_NAME = "Reddirector";
-	$SHORT_BASE = "bucho.pt";
+	$SHORT_BASE = "example.com";
 	
 	// DEBUG - warning: setting this to true may expose server details to the public
-	$DEBUG = true;
+	$DEBUG = false;
 
 ?>

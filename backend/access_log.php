@@ -1,9 +1,9 @@
 <?php
-	include_once("../includes/conf.php");
+	include_once("../includes/base.php");
 	include_once("../includes/cache.php");
 	include_once("../includes/roles.php");
 
-	conf_validate_login("my_urls");
+	base_validate_login("my_urls");
 	$session_token = cookies_has_session();
 	if(!roles_is_admin(cache_get_cached_user($session_token))){
 		header("Location: /list.php");
@@ -38,7 +38,7 @@
 					<?php
 						global $EXT_IP_CHECK;
 						$sql = "SELECT * FROM requests";
-						$conn = conf_get_connection();
+						$conn = base_get_connection();
 						$result = $conn->query($sql);
 						$conn = null;
 
@@ -50,7 +50,7 @@
 							echo "<td>".$item['request']."</td>";
 							$ip = $item['ip'];
 							echo "<td><a href='".$EXT_IP_CHECK."=$ip' target='_blank'>$ip</a></td>";
-							echo "<td>".conf_bin_2_eng($item['ok'])."</td>";
+							echo "<td>".base_bin_2_eng($item['ok'])."</td>";
 							echo "</tr>";
 						}
 					?>

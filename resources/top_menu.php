@@ -1,9 +1,9 @@
 <?php
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT']."/includes";
-	include_once($DOC_ROOT."/conf.php");
+	include_once($DOC_ROOT."/base.php");
 	include_once($DOC_ROOT."/cookies.php");
 	include_once($DOC_ROOT."/cache.php");
-	include_once($DOC_ROOT."/meta.php");
+	include_once($DOC_ROOT."/conf.php");
 	include_once($DOC_ROOT."/roles.php");
 	global $SITE_NAME;
 

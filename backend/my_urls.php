@@ -1,9 +1,9 @@
 <?php
-	include_once("../includes/conf.php");
+	include_once("../includes/base.php");
 	include_once("../includes/cookies.php");
 	include_once("../includes/cache.php");
 
-	conf_validate_login("my_urls");
+	base_validate_login("my_urls");
 	$session_token = cookies_has_session();
 	$cuser = cache_get_cached_user($session_token);
 

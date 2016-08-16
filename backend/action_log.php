@@ -1,9 +1,9 @@
 <?php
-	include_once("../includes/conf.php");
+	include_once("../includes/base.php");
 	include_once("../includes/cache.php");
 	include_once("../includes/roles.php");
 
-	conf_validate_login("my_urls");
+	base_validate_login("my_urls");
 	$session_token = cookies_has_session();
 	if(!roles_is_admin(cache_get_cached_user($session_token))){
 		header("Location: /list.php");
@@ -38,7 +38,7 @@
 				<tbody>
 					<?php
 						$sqlLog = "SELECT ts, u.name AS username, action, old_value, new_value FROM action_log a INNER JOIN users u ON u.id = a.user";
-						$conn = conf_get_connection();
+						$conn = base_get_connection();
 						$result = $conn->query($sqlLog);
 						$conn = null;
 

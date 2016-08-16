@@ -1,6 +1,6 @@
 Changelog
 =========
-[0.3-SNAPSHOT] 2016-08-15
+[0.3-SNAPSHOT] 2016-08-16
 -------------------------
 ### Added
 - User name caching
@@ -13,12 +13,15 @@ Changelog
 - API
 - Admin control over all strings
 - Requests made via AJAX
-- Added user control panel
-- Added action log
+- User control panel
+- Action log
+- Session termination (i.e. terminate all active sessions but the current)
 
 ### Changed
 - Log is now accessible only to users with `admin` role
 - Harmonized functions naming (added prefixes to functions names)
+- conf.php was renamed to base.php
+- secrets.php and meta.php were merged into a new conf.php
 
 ### Removed
 - Unused functions to get global variables values (replaced by direct access to those variables)

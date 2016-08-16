@@ -1,5 +1,5 @@
 <?php
-  include_once("conf.php");
+  include_once("base.php");
 
   $ONE_HOUR = 3600;
 
@@ -8,11 +8,11 @@
     $cached_username = apc_fetch("token-".$token);
     if($cached_username == false){
       $sqlRetrieveUsername = "SELECT name FROM tokens t INNER JOIN users u ON t.owner = u.id WHERE t.value = '$token'";
-      $conn = conf_get_connection();
+      $conn = base_get_connection();
       $result = $conn->query($sqlRetrieveUsername);
       $conn = null;
 
-      $result = conf_fetch_lazy($result);
+      $result = base_fetch_lazy($result);
       if($result == false){
         return null;
       }else{
@@ -28,11 +28,11 @@
     $cached_id = apc_fetch("token-id-".$token);
     if($cached_id == false){
       $sqlRetrieveUserId = "SELECT id FROM tokens t INNER JOIN users u ON t.owner = u.id WHERE t.value = '$token'";
-      $conn = conf_get_connection();
+      $conn = base_get_connection();
       $result = $conn->query($sqlRetrieveUserId);
       $conn = null;
 
-      $result = conf_fetch_lazy($result);
+      $result = base_fetch_lazy($result);
       if($result == false){
         return null;
       }else{
@@ -48,11 +48,11 @@
     $cached_long_url = apc_fetch("url-".$short_url);
     if($cached_long_url == false){
       $sqlSelect = "SELECT long_url FROM translation WHERE short_url = '$short_url'";
-      $conn = conf_get_connection();
+      $conn = base_get_connection();
       $result = $conn->query($sqlSelect);
       $conn = null;
 
-      $result = conf_fetch_lazy($result);
+      $result = base_fetch_lazy($result);
       if($result == false){
         return null;
       }else{

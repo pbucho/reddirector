@@ -1,5 +1,5 @@
 <?php
-	include_once("includes/conf.php");
+	include_once("includes/base.php");
 	include_once("includes/cache.php");
 
 	if(!isset($_GET['short'])){
@@ -15,12 +15,12 @@
 
 	$long_url = cache_get_cached_long_url($short_url);
 
-	$conn = conf_get_connection();
+	$conn = base_get_connection();
 	if(is_null($long_url)){
 		$sqlReq .= "'0')";
 		$conn->query($sqlReq);
 		$conn = null;
-		$image404 = conf_get_404_image();
+		$image404 = base_get_404_image();
 		header("Location: $image404");
 		die;
 	}
@@ -32,7 +32,7 @@
 
 	$conn = null;
 
-	if(!conf_starts_with($long_url, "http://") && !conf_starts_with($long_url, "https://")){
+	if(!base_starts_with($long_url, "http://") && !base_starts_with($long_url, "https://")){
 		$long_url = "http://".$long_url;
 	}
 	header("Location: $long_url");

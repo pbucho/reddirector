@@ -1,5 +1,5 @@
 <?php
-	include_once("includes/conf.php");
+	include_once("includes/base.php");
 	include_once("includes/cookies.php");
 	include_once("includes/cache.php");
 	include_once("includes/roles.php");
@@ -26,7 +26,7 @@
 			<h1>Redirector URL list</h1>
 			<?php include("resources/addition_header.php"); ?>
 			<hr/>
-			<?php echo "<input type='hidden' id='is_admin' name='is_admin' value='".conf_bin_2_eng($is_admin)."'>"; ?>
+			<?php echo "<input type='hidden' id='is_admin' name='is_admin' value='".base_bin_2_eng($is_admin)."'>"; ?>
 			<table class="table table-hover" id="link_table">
 				<thead>
 					<tr>

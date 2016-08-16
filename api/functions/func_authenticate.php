@@ -1,6 +1,6 @@
 <?php
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
-	include_once($DOC_ROOT."/includes/conf.php");
+	include_once($DOC_ROOT."/includes/base.php");
 	include_once($DOC_ROOT."/includes/cache.php");
 
 	function api_authenticate($token){
@@ -10,10 +10,10 @@
 
 		$sqlValidate = "SELECT expiry, revoked FROM tokens WHERE value = '$token'";
 
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlValidate);
 		$conn = null;
-		$result = conf_fetch_lazy($result);
+		$result = base_fetch_lazy($result);
 
 		if($result == false){
 			return json_encode(array('success' => false, 'reason' => 'Unknown token'));

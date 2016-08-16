@@ -1,10 +1,10 @@
 <?php
-	include_once("../includes/conf.php");
+	include_once("../includes/base.php");
 	include_once("../includes/cookies.php");
 	include_once("../includes/cache.php");
 	include_once("../includes/tokens.php");
 
-	conf_validate_login("control_panel");
+	base_validate_login("control_panel");
 	$session_token = cookies_has_session();
 	$cuser = cache_get_cached_user($session_token);
 	$user_id = cache_get_cached_user_id($session_token);
@@ -37,10 +37,10 @@
 						<td class="col-sm-2"><b>Registered</b></td><td class="col-sm-10">
 						<?php
 							$sqlDate = "SELECT registered FROM users WHERE name = '$cuser'";
-							$conn = conf_get_connection();
+							$conn = base_get_connection();
 							$result = $conn->query($sqlDate);
 							$conn = null;
-							$result = conf_fetch_lazy($result);
+							$result = base_fetch_lazy($result);
 							echo $result['registered'];
 						?>
 						</td>

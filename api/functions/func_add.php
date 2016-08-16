@@ -1,6 +1,6 @@
 <?php
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
-	include_once($DOC_ROOT."/includes/conf.php");
+	include_once($DOC_ROOT."/includes/base.php");
 	include_once($DOC_ROOT."/includes/cache.php");
 	include_once($DOC_ROOT."/includes/logger.php");
 	include_once("func_authenticate.php");
@@ -25,7 +25,7 @@
 		if(empty($longurl) || empty($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'URL not provided'));
 		}else{
-			$conn = conf_get_connection();
+			$conn = base_get_connection();
 			$sqlAdd = "INSERT INTO translation (short_url, long_url, owner) VALUES ('$shorturl', '$longurl', ";
 			if($token != false) {
 				$userid = cache_get_cached_user_id($token);

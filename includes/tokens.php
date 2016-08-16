@@ -1,15 +1,15 @@
 <?php
-	include_once("conf.php");
+	include_once("base.php");
 	include_once("cache.php");
 
 	// this will check for token existence and validity (i.e.: not expired nor revoked)
 	function tokens_validate_token($token){
 		$sqlValidate = "SELECT expiry, revoked FROM tokens WHERE value = '$token'";
 
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlValidate);
 		$conn = null;
-		$result = conf_fetch_lazy($result);
+		$result = base_fetch_lazy($result);
 
 		if($result == false){
 			return false;
@@ -41,9 +41,9 @@
 		$expiry = time() + $TOKEN_DURATION;
 
 		$sqlUsr = "SELECT id FROM users WHERE name = '$user'";
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlUsr);
-		$userid = conf_fetch_lazy($result)['id'];
+		$userid = base_fetch_lazy($result)['id'];
 		if(is_null($userid)){
 			$conn = null;
 			return null;
@@ -58,16 +58,16 @@
 
 	function tokens_revoke_token($token){
 		$sqlRev = "UPDATE tokens SET revoked = '1' WHERE value = '$token'";
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$conn->query($sqlRev);
 		$conn = null;
 	}
 
 	function tokens_revoke_all_user_tokens($user){
 		$sqlUsr = "SELECT id FROM users WHERE name = '$user'";
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlUsr);
-		$userid = conf_fetch_lazy($result)['id'];
+		$userid = base_fetch_lazy($result)['id'];
 		$sqlRev = "UPDATE tokens SET revoked = '1' WHERE owner = '$userid'";
 		$conn->query($sqlRev);
 		$conn = null;
@@ -76,7 +76,7 @@
 	function tokens_revoke_all_but_this_token($token){
 		$user_id = cache_get_cached_user_id($token);
 		$sqlRevok = "DELETE FROM tokens WHERE value <> '$token' AND owner = $user_id";
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlRevok);
 		$conn = null;
 	}
@@ -84,10 +84,10 @@
 	function tokens_get_active_sessions($user){
 		$user_id = cache_get_cached_user_id($user);
 		$sqlSessions = "SELECT count(*) AS sessions FROM tokens WHERE revoked <> 1 AND expiry > now() AND owner = '$user_id'";
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$result = $conn->query($sqlSessions);
 		$conn = null;
-		$result = conf_fetch_lazy($result);
+		$result = base_fetch_lazy($result);
 		return $result['sessions'];
 	}
 

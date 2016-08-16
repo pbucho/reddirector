@@ -1,6 +1,6 @@
 <?php
 	$DOC_ROOT = $_SERVER['DOCUMENT_ROOT'];
-	include_once($DOC_ROOT."/includes/conf.php");
+	include_once($DOC_ROOT."/includes/base.php");
 	include_once($DOC_ROOT."/includes/roles.php");
 	include_once($DOC_ROOT."/includes/cache.php");
 	include_once($DOC_ROOT."/includes/logger.php");
@@ -20,10 +20,10 @@
 			return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
 		}
 
-		$conn = conf_get_connection();
+		$conn = base_get_connection();
 		$sqlValidate1 = "SELECT short_url, long_url FROM translation WHERE short_url = '$shorturl'";
 		$result = $conn->query($sqlValidate1);
-		$result = conf_fetch_lazy($result);
+		$result = base_fetch_lazy($result);
 
 		if($result == false){
 			$conn = null;
@@ -45,7 +45,7 @@
 		}else{
 			$sqlValidate2 = "SELECT t.short_url FROM tokens tk INNER JOIN translation t ON tk.owner = t.owner WHERE tk.value = '$token' AND t.short_url = '$shorturl'";
 			$result = $conn->query($sqlValidate2);
-			$result = conf_fetch_lazy($result);
+			$result = base_fetch_lazy($result);
 			if($result == false){
 				$conn = null;
 				return json_encode(array('success' => false, 'reason' => 'Operation not allowed'));
