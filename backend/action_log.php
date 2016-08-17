@@ -37,7 +37,7 @@
 				</thead>
 				<tbody>
 					<?php
-						$sqlLog = "SELECT ts, u.name AS username, action, old_value, new_value FROM action_log a INNER JOIN users u ON u.id = a.user";
+						$sqlLog = "SELECT ts, u.name AS username, anon_ip, action, old_value, new_value FROM action_log a LEFT JOIN users u ON u.id = a.user";
 						$conn = base_get_connection();
 						$result = $conn->query($sqlLog);
 						$conn = null;
@@ -47,7 +47,11 @@
 						foreach($result as $item){
 							echo "<tr>";
 							echo "<td>".$item['ts']."</td>";
-							echo "<td>".$item['username']."</td>";
+							if(is_null($item['username'])){
+								echo "<td>IP:".$item['anon_ip']."</td>";
+							}else{
+								echo "<td>".$item['username']."</td>";
+							}
 							echo "<td>".$item['action']."</td>";
 							echo "<td>".($item['old_value'] == null ? "-" : $item['old_value'])."</td>";
 							echo "<td>".($item['new_value'] == null ? "-" : $item['new_value'])."</td>";

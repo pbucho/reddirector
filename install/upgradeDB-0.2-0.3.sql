@@ -12,9 +12,27 @@ CREATE INDEX user_role_idx USING HASH ON `redirect`.`roles`(user_id);
 
 CREATE TABLE `redirect`.`action_log` (
     ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    user int NOT NULL,
+    user int,
+    anon_ip varchar(42),
     action varchar(255) NOT NULL,
     old_value varchar(255),
     new_value varchar(255),
     FOREIGN KEY (user) REFERENCES users (id)
 );
+
+delimiter $$
+DROP TRIGGER IF EXISTS trg_col_xor$$
+
+CREATE TRIGGER trg_col_xor BEFORE INSERT ON `redirect`.`action_log`
+FOR EACH ROW
+BEGIN
+	IF (
+		(NEW.user IS NULL AND NEW.anon_ip IS NULL) ||
+		(NEW.anon_ip IS NOT NULL AND NEW.user IS NOT NULL)
+	)
+	THEN
+		SIGNAL SQLSTATE '44000'
+			SET MESSAGE_TEXT = 'user and anon_ip are mutually exclusive';
+	END IF;
+END$$
+delimiter ;

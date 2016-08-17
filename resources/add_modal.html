@@ -43,12 +43,12 @@
   });
   function submitAdd() {
     var token = getToken();
-    if(token == null) {
-      alert("An error occurred. Please log in again.");
-      return;
-    }
     var req = new XMLHttpRequest();
-    var connection = "/api/add.php?token="+token+"&shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val());
+    var connection = "/api/add.php?";
+	if(token != null){
+		connection += "token="+token+"&";
+	}
+	connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val());
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200){

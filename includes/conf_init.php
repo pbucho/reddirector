@@ -15,7 +15,7 @@
 
 	$AUTHOR = "Pedro Bucho";
 	$VERSION = "v0.3-SNAPSHOT";
-	$SDATE = "2016-08-16";
+	$SDATE = "2016-08-17";
 	
 	// SERVICE CONFIGURATION
 	

@@ -3,10 +3,11 @@
 	include_once($DOC_ROOT."/includes/base.php");
 	include_once($DOC_ROOT."/includes/cache.php");
 	include_once($DOC_ROOT."/includes/logger.php");
+	include_once($DOC_ROOT."/includes/conf.php");
 	include_once("func_authenticate.php");
 
 	function api_add($token, $shorturl, $longurl){
-		global $ACTION_ADD_URL;
+		global $ACTION_ADD_URL, $DEBUG;
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
@@ -43,7 +44,11 @@
 				if($e->getCode() == 23000){
 					return json_encode(array('success' => false, 'reason' => 'String \''.$shorturl.'\' already exists'));
 				}else{
-					return json_encode(array('success' => false, 'reason' => 'Unknown error', 'code' => $e->getCode()));
+					$return_array = array('success' => false, 'reason' => 'Unknown error', 'code' => $e->getCode());
+					if($DEBUG){
+						array_push($return_array['message'], $e->getMessage());
+					}
+					return json_encode($return_array);
 				}
 			}
 		}
