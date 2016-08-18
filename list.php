@@ -37,6 +37,7 @@
 						<?php
 							if($is_admin){
 								echo "<th style=\"width: 7.5%\">Owner</th>";
+								echo "<th style=\"width: 7.5%\">Priv. URL</th>";
 								echo "<th style=\"width: 10%\">Admin actions</th>";
 							}
 						?>

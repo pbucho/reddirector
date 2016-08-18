@@ -17,7 +17,7 @@
 
 	// SERVICE CONFIGURATION
 
-	$DEFAULT = "/login.php";
+	$DEFAULT = "/list.php";
 	$LOGIN_EXPIRY_S = 7200;
 	$TOKEN_DURATION = 86400; // 24hrs in seconds
 	$EXT_IP_CHECK = "http://ip-lookup.net/index.php?ip";
