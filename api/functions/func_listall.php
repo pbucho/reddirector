@@ -32,8 +32,13 @@
 			$response_array = array('success' => true, 'items' => array());
 
 			foreach($result as $item){
-				if($item['private_url'] == 1 && (!$isadmin && $item['uid'] != $currentuser)){
-					continue;
+				if($item['private_url'] == 1){
+					if(is_null($currentuser)){
+						continue;
+					}
+					if(!$isadmin && !is_null($currentuser) && $item['uid'] != $currentuser){
+						continue;
+					}
 				}
 				$item_response = array('string' => $item['short_url'], 'longurl' => $item['long_url'], 'dateadded' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']);
 				if(!is_null($token) && json_decode(api_authenticate($token), true)['success']){
