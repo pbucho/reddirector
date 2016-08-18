@@ -36,7 +36,7 @@
 						<th style="width: 5%">Views</th>
 						<?php
 							if($is_admin){
-								echo "<th style=\"width: 15%\">Owner</th>";
+								echo "<th style=\"width: 7.5%\">Owner</th>";
 								echo "<th style=\"width: 10%\">Admin actions</th>";
 							}
 						?>
@@ -85,6 +85,7 @@
 								{ data: "dateadded" },
 								{ data: "views" },
 								{ data: "owner" },
+								{ data: "privateurl" },
 								{ data: null,
 									"target": 5,
 									"defaultContent": "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal'><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal'><span class='fa fa-trash-o'></span></button>"
@@ -94,7 +95,7 @@
 					}
 					$("#link_table").on('click','button',function(){
 						var data = table.row($(this).parents('tr')).data();
-						setEditFields(data['string'], data['longurl']);
+						setEditFields(data['string'], data['longurl'], data['privateurl']);
 						setConfirmFields(data['string']);
 					});
 				});

@@ -20,6 +20,13 @@
               <input type="hidden" id="ed_short_url" name="short_url">
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <label class="control-label">
+                <input type="checkbox" id="ed_private_url" name="ed_private_url">&nbsp;Private URL</label>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <i id="ed_spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
@@ -44,7 +51,7 @@
       return;
     }
     var req = new XMLHttpRequest();
-    var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURI($("#ed_long_url").val());
+    var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURI($("#ed_long_url").val())+"&privateurl="+$("#ed_private_url").prop("checked");
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200){
@@ -64,10 +71,11 @@
 	disableElementsEdit(false);
   });
   function disableElementsEdit(value){
-	$("#ed_btn_cross").attr("disabled", value);
-	$("#ed_btn_cancel").attr("disabled", value);
-	$("#ed_btn_ok").attr("disabled", value);
-	$("#ed_long_url").attr("disabled", value);
-	value ? $("#spinner").show() : $("#spinner").hide();
+  	$("#ed_btn_cross").attr("disabled", value);
+  	$("#ed_btn_cancel").attr("disabled", value);
+  	$("#ed_btn_ok").attr("disabled", value);
+  	$("#ed_long_url").attr("disabled", value);
+    $("#ed_private_url").attr("disabled", value);
+  	value ? $("#spinner").show() : $("#spinner").hide();
   }
 </script>

@@ -31,6 +31,7 @@ CREATE TABLE `redirect`.`translation` (
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `owner` int,
   `views` int(10) unsigned NOT NULL DEFAULT 0,
+  `private_url` TINYINT(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`short_url`),
   FOREIGN KEY (owner) REFERENCES `redirect`.`users`(id)
 );

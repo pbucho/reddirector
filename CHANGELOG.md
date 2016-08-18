@@ -1,6 +1,6 @@
 Changelog
 =========
-[0.3-SNAPSHOT] 2016-08-16
+[0.3-SNAPSHOT] 2016-08-18
 -------------------------
 ### Added
 - User name caching
@@ -16,6 +16,7 @@ Changelog
 - User control panel
 - Action log
 - Session termination (i.e. terminate all active sessions but the current)
+- Added private URLs for registered users
 
 ### Changed
 - Log is now accessible only to users with `admin` role

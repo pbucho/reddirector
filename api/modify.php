@@ -8,6 +8,7 @@
 	$NO_WARN = true;
 	echo api_modify(isset($_GET['token']) ? $_GET['token'] : null,
 									isset($_GET['shorturl']) ? $_GET['shorturl'] : null,
-									isset($_GET['longurl']) ? $_GET['longurl'] : null);
+									isset($_GET['longurl']) ? $_GET['longurl'] : null,
+									isset($_GET['privateurl']) ? $_GET['privateurl'] : false);
 
 ?>

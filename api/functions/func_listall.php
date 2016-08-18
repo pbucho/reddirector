@@ -17,21 +17,29 @@
 			}
 		}
 
-		$sqlList = "SELECT short_url, long_url, added, views, u.name AS owner FROM translation t LEFT JOIN users u ON t.owner = u.id";
+		$sqlList = "SELECT short_url, long_url, added, views, u.name AS owner, u.id AS uid, private_url FROM translation t LEFT JOIN users u ON t.owner = u.id";
+		$sqlOwner = "SELECT u.id AS user FROM users u INNER JOIN tokens t ON t.owner = u.id WHERE t.value = '$token'";
 		if(!is_null($minlim) && !is_null($maxlim)){
 			$sqlList = $sqlList." LIMIT $minlim , $maxlim";
 		}
 		$conn = base_get_connection();
+		$currentuser = $conn->query($sqlOwner);
+		$currentuser = base_fetch_lazy($currentuser)['user'];
+		$isadmin = roles_is_admin(cache_get_cached_user($token));
 		try{
 			$result = $conn->query($sqlList);
 			$conn = null;
 			$response_array = array('success' => true, 'items' => array());
 
 			foreach($result as $item){
+				if($item['private_url'] == 1 && (!$isadmin && $item['uid'] != $currentuser)){
+					continue;
+				}
 				$item_response = array('string' => $item['short_url'], 'longurl' => $item['long_url'], 'dateadded' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']);
 				if(!is_null($token) && json_decode(api_authenticate($token), true)['success']){
-					if(roles_is_admin(cache_get_cached_user($token))){
+					if($isadmin){
 						$item_response['owner'] = $item['owner'];
+						$item_response['privateurl'] = (bool) $item['private_url'];
 					}
 				}
 				array_push($response_array['items'], $item_response);

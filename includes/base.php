@@ -30,6 +30,14 @@
 		return "false";
 	}
 
+	function base_eng_2_int($value) {
+		if(strcmp($value, "true") === 0){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
 	// from http://stackoverflow.com/a/10473026
 	function base_starts_with($haystack, $needle) {
   	return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
