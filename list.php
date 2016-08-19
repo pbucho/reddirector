@@ -37,7 +37,7 @@
 						<?php
 							if($is_admin){
 								echo "<th style=\"width: 7.5%\">Owner</th>";
-								echo "<th style=\"width: 7.5%\">Priv. URL</th>";
+								echo "<th style=\"width: 7.5%\">Unlisted</th>";
 								echo "<th style=\"width: 10%\">Admin actions</th>";
 							}
 						?>
@@ -80,15 +80,23 @@
 							},
 							"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 							"order": [[ 2, "desc" ]],
-							"columns": [
-								{ data: "string" },
-								{ data: "longurl" },
-								{ data: "dateadded" },
-								{ data: "views" },
-								{ data: "owner" },
-								{ data: "unlistedurl" },
-								{ data: null,
-									"target": 5,
+							"columnDefs": [
+								{ "targets": 0, "data": "string" },
+								{ "targets": 1, "data": "longurl" },
+								{ "targets": 2, "data": "dateadded" },
+								{ "targets": 3, "data": "views" },
+								{ "targets": 4, "data": "owner" },
+								{ "targets": 5,
+									"data": function (row){
+										if(row.unlistedurl){
+											return "<span style='color: green'><i class='fa fa-check'></i></span>";
+										}else{
+											return "<span style='color: red'><i class='fa fa-times'></i></span>";
+										}
+									}
+								},
+								{ "targets": 6,
+									"data": null,
 									"defaultContent": "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal'><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal'><span class='fa fa-trash-o'></span></button>"
 								}
 							]
