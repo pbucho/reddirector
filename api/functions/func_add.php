@@ -6,8 +6,9 @@
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once("func_authenticate.php");
 
-	function api_add($token, $shorturl, $longurl){
+	function api_add($token, $shorturl, $longurl, $privateurl){
 		global $ACTION_ADD_URL, $DEBUG;
+		$privateurl = base_eng_2_int($privateurl);
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
@@ -22,17 +23,21 @@
 				return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
 			}
 		}
+		
+		if(is_null($token) && $privateurl == 1){
+			return json_encode(array('success' => false, 'reason' => 'No private URLs allowed for unauth users'));
+		}
 
 		if(empty($longurl) || empty($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'URL not provided'));
 		}else{
 			$conn = base_get_connection();
-			$sqlAdd = "INSERT INTO translation (short_url, long_url, owner) VALUES ('$shorturl', '$longurl', ";
+			$sqlAdd = "INSERT INTO translation (short_url, long_url, private_url, owner) VALUES ('$shorturl', '$longurl', '$privateurl', ";
 			if($token != false) {
 				$userid = cache_get_cached_user_id($token);
-				$sqlAdd = $sqlAdd."$userid)";
+				$sqlAdd .= "$userid)";
 			}else{
-				$sqlAdd = $sqlAdd."NULL)";
+				$sqlAdd .= "NULL)";
 			}
 			try{
 				$result = $conn->query($sqlAdd);

@@ -19,6 +19,13 @@
               <input type="text" class="form-control" id="add_short_url" name="short_url" placeholder="String">
             </div>
           </div>
+          <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <label class="control-label">
+                <input type="checkbox" id="add_private_url" name="add_private_url">&nbsp;Private URL</label>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <i id="add_spinner" class="fa fa-circle-o-notch fa-spin" style="display: none"></i>&nbsp;&nbsp;
@@ -58,6 +65,10 @@
         }else{
           alert("Could not add URL: "+response['reason']);
           disableElementsAdd(false);
+          if(token == null){
+			  $("#add_private_url").attr("disabled", true);
+			  $("#add_private_url").wrap("<abbr title='You cannot add private URLs'></abbr>");
+		  }
         }
       }
     };
@@ -68,6 +79,11 @@
 	disableElementsAdd(false);
 	$("#add_long_url").val("");
 	$("#add_short_url").val("");
+	var token = getToken();
+	if(token == null){
+		$("#add_private_url").attr("disabled", true);
+		$("#add_private_url").wrap("<abbr title='You cannot add private URLs'></abbr>");
+	}
   });
   function disableElementsAdd(value){
 	$("#add_btn_cross").attr("disabled", value);
@@ -75,6 +91,7 @@
 	$("#add_btn_ok").attr("disabled", value);
 	$("#add_long_url").attr("disabled", value);
 	$("#add_short_url").attr("disabled", value);
+	$("#add_private_url").attr("disabled", value);
 	value ? $("#spinner").show() : $("#spinner").hide();
   }
 </script>
