@@ -29,10 +29,11 @@
 			<table class="table table-hover" id="link_table" style="table-layout: fixed; width: 100%; word-wrap: break-word">
 				<thead>
 					<tr>
-						<th style="width: 20%">String</th>
+						<th style="width: 10%">String</th>
 						<th style="width: 50%">Long URL</th>
 						<th style="width: 10%">Date added</th>
-						<th style="width: 10%">Views</th>
+						<th style="width: 5%">Views</th>
+						<th style="width: 10%">Unlisted</th>
 						<th style="width: 10%">Actions</th>
 					</tr>
 				</thead>
@@ -56,20 +57,42 @@
 						},
 						"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 						"order": [[ 2, "desc" ]],
-						"columns": [
+						/*"columns": [
 							{ data: "string" },
 							{ data: "longurl" },
 							{ data: "dateadded" },
 							{ data: "views" },
+							{ data: "unlistedurl" },
 							{ data: null,
 								"target": 4,
+								"defaultContent": "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal'><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal'><span class='fa fa-trash-o'></span></button>"
+							}
+						]*/
+						"columnDefs": [
+							{ "targets": 0, "data": "string" },
+							{ "targets": 1, "data": "longurl" },
+							{ "targets": 2, "data": "dateadded" },
+							{ "targets": 3, "data": "views" },
+							{ "targets": 4,
+						 		"data": function (row){
+									console.log(row.unlistedurl);
+									if(row.unlistedurl){
+										return "<span style='color: green'><i class='fa fa-check'></i></span>";
+									}else{
+										return "<span style='color: red'><i class='fa fa-times'></i></span>";
+									}
+								}
+							},
+							{ "targets": 5,
+								"data": null,
+								"data": null,
 								"defaultContent": "<button class='btn btn-primary' data-toggle='modal' data-target='#edit_modal'><span class='fa fa-pencil'></span></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger' data-toggle='modal' data-target='#confirm_modal'><span class='fa fa-trash-o'></span></button>"
 							}
 						]
 					});
 					$("#link_table").on('click','button',function(){
 						var data = table.row($(this).parents('tr')).data();
-						setEditFields(data['string'], data['longurl']);
+						setEditFields(data['string'], data['longurl'], data['unlistedurl']);
 						setConfirmFields(data['string']);
 					});
 				});
