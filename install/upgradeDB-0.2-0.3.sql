@@ -1,6 +1,6 @@
 ALTER TABLE `redirect`.`translation` ADD owner int;
 ALTER TABLE `redirect`.`translation` ADD FOREIGN KEY (owner) REFERENCES `redirect`.`users` (id);
-ALTER TABLE `redirect`.`translation` ADD private_url TINYINT(1) NOT NULL DEFAULT '0';
+ALTER TABLE `redirect`.`translation` ADD unlisted_url TINYINT(1) NOT NULL DEFAULT '0';
 
 CREATE TABLE `redirect`.`roles` (
     user_id int NOT NULL,

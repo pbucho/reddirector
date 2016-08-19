@@ -17,7 +17,7 @@
 			}
 		}
 
-		$sqlList = "SELECT short_url, long_url, added, views, u.name AS owner, u.id AS uid, private_url FROM translation t LEFT JOIN users u ON t.owner = u.id";
+		$sqlList = "SELECT short_url, long_url, added, views, u.name AS owner, u.id AS uid, unlisted_url FROM translation t LEFT JOIN users u ON t.owner = u.id";
 		$sqlOwner = "SELECT u.id AS user FROM users u INNER JOIN tokens t ON t.owner = u.id WHERE t.value = '$token'";
 		if(!is_null($minlim) && !is_null($maxlim)){
 			$sqlList = $sqlList." LIMIT $minlim , $maxlim";
@@ -32,7 +32,7 @@
 			$response_array = array('success' => true, 'items' => array());
 
 			foreach($result as $item){
-				if($item['private_url'] == 1){
+				if($item['unlisted_url'] == 1){
 					if(is_null($currentuser)){
 						continue;
 					}
@@ -44,7 +44,7 @@
 				if(!is_null($token) && json_decode(api_authenticate($token), true)['success']){
 					if($isadmin){
 						$item_response['owner'] = $item['owner'];
-						$item_response['privateurl'] = (bool) $item['private_url'];
+						$item_response['unlistedurl'] = (bool) $item['unlisted_url'];
 					}
 				}
 				array_push($response_array['items'], $item_response);

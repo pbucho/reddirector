@@ -16,7 +16,7 @@ Changelog
 - User control panel
 - Action log
 - Session termination (i.e. terminate all active sessions but the current)
-- Added private URLs for registered users
+- Added unlisted URLs for registered users
 
 ### Changed
 - Log is now accessible only to users with `admin` role

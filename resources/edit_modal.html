@@ -24,7 +24,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
               <label class="control-label">
-                <input type="checkbox" id="ed_private_url" name="ed_private_url">&nbsp;Private URL</label>
+                <input type="checkbox" id="ed_unlisted_url" name="ed_unlisted_url">&nbsp;Unlisted URL</label>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
       return;
     }
     var req = new XMLHttpRequest();
-    var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURI($("#ed_long_url").val())+"&privateurl="+$("#ed_private_url").prop("checked");
+    var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURI($("#ed_long_url").val())+"&unlistedurl="+$("#ed_unlisted_url").prop("checked");
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200){
@@ -75,7 +75,7 @@
   	$("#ed_btn_cancel").attr("disabled", value);
   	$("#ed_btn_ok").attr("disabled", value);
   	$("#ed_long_url").attr("disabled", value);
-    $("#ed_private_url").attr("disabled", value);
+    $("#ed_unlisted_url").attr("disabled", value);
   	value ? $("#spinner").show() : $("#spinner").hide();
   }
 </script>

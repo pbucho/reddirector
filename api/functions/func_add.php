@@ -6,9 +6,9 @@
 	include_once($DOC_ROOT."/includes/conf.php");
 	include_once("func_authenticate.php");
 
-	function api_add($token, $shorturl, $longurl, $privateurl){
+	function api_add($token, $shorturl, $longurl, $unlistedurl){
 		global $ACTION_ADD_URL, $DEBUG;
-		$privateurl = base_eng_2_int($privateurl);
+		$unlistedurl = base_eng_2_int($unlistedurl);
 		if(is_null($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'Missing short URL'));
 		}
@@ -24,15 +24,15 @@
 			}
 		}
 
-		if(is_null($token) && $privateurl == 1){
-			return json_encode(array('success' => false, 'reason' => 'No private URLs allowed for unauth users'));
+		if(is_null($token) && $unlistedurl == 1){
+			return json_encode(array('success' => false, 'reason' => 'No unlisted URLs allowed for unauth users'));
 		}
 
 		if(empty($longurl) || empty($shorturl)){
 			return json_encode(array('success' => false, 'reason' => 'URL not provided'));
 		}else{
 			$conn = base_get_connection();
-			$sqlAdd = "INSERT INTO translation (short_url, long_url, private_url, owner) VALUES ('$shorturl', '$longurl', '$privateurl', ";
+			$sqlAdd = "INSERT INTO translation (short_url, long_url, unlisted_url, owner) VALUES ('$shorturl', '$longurl', '$unlistedurl', ";
 			if($token != false) {
 				$userid = cache_get_cached_user_id($token);
 				$sqlAdd .= "$userid)";
@@ -43,8 +43,8 @@
 				$result = $conn->query($sqlAdd);
 				$conn = null;
 				$newvalue = $shorturl." &rarr; ".$longurl;
-				if($privateurl == 1){
-					$newvalue .= " (private)";
+				if($unlistedurl == 1){
+					$newvalue .= " (unlisted)";
 				}
 				logger_log_action($userid, $ACTION_ADD_URL, null, $newvalue);
 				return json_encode(array('success' => true, 'shorturl' => $shorturl, 'longurl' => $longurl, 'owner' => cache_get_cached_user($token)));

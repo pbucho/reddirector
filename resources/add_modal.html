@@ -23,7 +23,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
               <label class="control-label">
-                <input type="checkbox" id="add_private_url" name="add_private_url">&nbsp;Private URL</label>
+                <input type="checkbox" id="add_unlisted_url" name="add_unlisted_url">&nbsp;Unlisted URL</label>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
     if(token != null){
       connection += "token="+token+"&";
     }
-    connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val())+"&privateurl="+$("#add_private_url").prop("checked");
+    connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val())+"&unlistedurl="+$("#add_unlisted_url").prop("checked");
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200) {
@@ -66,8 +66,8 @@
           alert("Could not add URL: "+response['reason']);
           disableElementsAdd(false);
           if(token == null){
-            $("#add_private_url").attr("disabled", true);
-            $("#add_private_url").wrap("<abbr title='You cannot add private URLs'></abbr>");
+            $("#add_unlisted_url").attr("disabled", true);
+            $("#add_unlisted_url").wrap("<abbr title='You cannot add unlisted URLs'></abbr>");
           }
         }
       }
@@ -82,8 +82,8 @@
 	$("#add_short_url").val("");
 	var token = getToken();
 	if(token == null){
-		$("#add_private_url").attr("disabled", true);
-		$("#add_private_url").wrap("<abbr title='You cannot add private URLs'></abbr>");
+		$("#add_unlisted_url").attr("disabled", true);
+		$("#add_unlisted_url").wrap("<abbr title='You cannot add unlisted URLs'></abbr>");
 	}
   });
   function disableElementsAdd(value){
@@ -92,7 +92,7 @@
 	$("#add_btn_ok").attr("disabled", value);
 	$("#add_long_url").attr("disabled", value);
 	$("#add_short_url").attr("disabled", value);
-	$("#add_private_url").attr("disabled", value);
+	$("#add_unlisted_url").attr("disabled", value);
 	value ? $("#spinner").show() : $("#spinner").hide();
   }
 </script>
