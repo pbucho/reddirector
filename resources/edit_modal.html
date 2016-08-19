@@ -57,18 +57,19 @@
       if(req.readyState == 4 && req.status == 200){
         var response = JSON.parse(req.responseText);
         if(response['success']){
-          location.reload();
+          table.ajax.reload(null, false);
+          $("#edit_modal").modal("hide");
         }else{
           alert("Could not edit URL: "+response['reason']);
-          disableElementsEdit(false);
         }
+        disableElementsEdit(false);
       }
     };
     disableElementsEdit(true);
     req.send();
   }
   $(document).ready(function(){
-	disableElementsEdit(false);
+	   disableElementsEdit(false);
   });
   function disableElementsEdit(value){
   	$("#ed_btn_cross").attr("disabled", value);

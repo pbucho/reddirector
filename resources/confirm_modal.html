@@ -34,11 +34,12 @@
       if(req.readyState == 4 && req.status == 200){
         var response = JSON.parse(req.responseText);
         if(response['success']){
-          location.reload();
+          table.ajax.reload(null, false);
+          $("#confirm_modal").modal("hide");
         }else{
           alert("Could not edit URL: "+response['reason']);
-          disableElementsConfirm(false);
         }
+        disableElementsConfirm(false);
       }
     };
     disableElementsConfirm(true)

@@ -61,15 +61,16 @@
       if(req.readyState == 4 && req.status == 200) {
         var response = JSON.parse(req.responseText);
         if(response['success']){
-          location.reload();
+          table.ajax.reload(null, false);
+          $("#add_modal").modal("hide");
         }else{
           alert("Could not add URL: "+response['reason']);
-          disableElementsAdd(false);
           if(token == null){
             $("#add_unlisted_url").attr("disabled", true);
-            $("#add_unlisted_url").wrap("<abbr title='You cannot add unlisted URLs'></abbr>");
+            $("#add_unlisted_url").attr("title", "You cannot add unlisted URLs");
           }
         }
+        disableElementsAdd(false);
       }
     };
     disableElementsAdd(true);
@@ -77,22 +78,22 @@
   }
 
   $(document).ready(function(){
-	disableElementsAdd(false);
-	$("#add_long_url").val("");
-	$("#add_short_url").val("");
-	var token = getToken();
-	if(token == null){
-		$("#add_unlisted_url").attr("disabled", true);
-		$("#add_unlisted_url").wrap("<abbr title='You cannot add unlisted URLs'></abbr>");
-	}
+  	disableElementsAdd(false);
+  	$("#add_long_url").val("");
+  	$("#add_short_url").val("");
+  	var token = getToken();
+  	if(token == null){
+  		$("#add_unlisted_url").attr("disabled", true);
+      $("#add_unlisted_url").attr("title", "You cannot add unlisted URLs");
+  	}
   });
   function disableElementsAdd(value){
-	$("#add_btn_cross").attr("disabled", value);
-	$("#add_btn_cancel").attr("disabled", value);
-	$("#add_btn_ok").attr("disabled", value);
-	$("#add_long_url").attr("disabled", value);
-	$("#add_short_url").attr("disabled", value);
-	$("#add_unlisted_url").attr("disabled", value);
-	value ? $("#spinner").show() : $("#spinner").hide();
+  	$("#add_btn_cross").attr("disabled", value);
+  	$("#add_btn_cancel").attr("disabled", value);
+  	$("#add_btn_ok").attr("disabled", value);
+  	$("#add_long_url").attr("disabled", value);
+  	$("#add_short_url").attr("disabled", value);
+  	$("#add_unlisted_url").attr("disabled", value);
+  	value ? $("#spinner").show() : $("#spinner").hide();
   }
 </script>
