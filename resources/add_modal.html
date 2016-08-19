@@ -52,13 +52,13 @@
     var token = getToken();
     var req = new XMLHttpRequest();
     var connection = "/api/add.php?";
-	if(token != null){
-		connection += "token="+token+"&";
-	}
-	connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val());
+    if(token != null){
+      connection += "token="+token+"&";
+    }
+    connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val())+"&privateurl="+$("#add_private_url").prop("checked");
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
-      if(req.readyState == 4 && req.status == 200){
+      if(req.readyState == 4 && req.status == 200) {
         var response = JSON.parse(req.responseText);
         if(response['success']){
           location.reload();
@@ -66,15 +66,16 @@
           alert("Could not add URL: "+response['reason']);
           disableElementsAdd(false);
           if(token == null){
-			  $("#add_private_url").attr("disabled", true);
-			  $("#add_private_url").wrap("<abbr title='You cannot add private URLs'></abbr>");
-		  }
+            $("#add_private_url").attr("disabled", true);
+            $("#add_private_url").wrap("<abbr title='You cannot add private URLs'></abbr>");
+          }
         }
       }
     };
     disableElementsAdd(true);
     req.send();
   }
+
   $(document).ready(function(){
 	disableElementsAdd(false);
 	$("#add_long_url").val("");

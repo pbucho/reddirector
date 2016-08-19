@@ -23,7 +23,7 @@
 				return json_encode(array('success' => false, 'reason' => 'Authentication failure'));
 			}
 		}
-		
+
 		if(is_null($token) && $privateurl == 1){
 			return json_encode(array('success' => false, 'reason' => 'No private URLs allowed for unauth users'));
 		}
@@ -42,7 +42,11 @@
 			try{
 				$result = $conn->query($sqlAdd);
 				$conn = null;
-				logger_log_action($userid, $ACTION_ADD_URL, null, $shorturl." &rarr; ".$longurl);
+				$newvalue = $shorturl." &rarr; ".$longurl;
+				if($privateurl == 1){
+					$newvalue .= " (private)";
+				}
+				logger_log_action($userid, $ACTION_ADD_URL, null, $newvalue);
 				return json_encode(array('success' => true, 'shorturl' => $shorturl, 'longurl' => $longurl, 'owner' => cache_get_cached_user($token)));
 			}catch(PDOException $e){
 				$conn = null;
