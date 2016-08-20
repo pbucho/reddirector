@@ -19,6 +19,7 @@
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
 		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
 	</head>
 	<body>
 		<?php include("../resources/top_menu.php"); ?>
@@ -50,8 +51,13 @@
 							echo "<td>".$item['request']."</td>";
 							$ip = $item['ip'];
 							echo "<td><a href='".$EXT_IP_CHECK."=$ip' target='_blank'>$ip</a></td>";
-							echo "<td>".base_bin_2_eng($item['ok'])."</td>";
-							echo "</tr>";
+							echo "<td>";
+							if((bool) $item['ok']){
+								echo "<span style='color: green'><i class='fa fa-check'></i></span>";
+							}else{
+								echo "<span style='color: red'><i class='fa fa-times'></i></span>";
+							}
+							echo "</td></tr>";
 						}
 					?>
 				</tbody>
