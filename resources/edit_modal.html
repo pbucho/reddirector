@@ -20,6 +20,13 @@
               <input type="hidden" id="ed_short_url" name="short_url">
             </div>
           </div>
+          <div class="form-group" id="owner_div">
+            <label class="control-label col-sm-3" for="owner">Owner:</label>
+            <div class="col-sm-9">
+              <select class="form-control" id="owner">
+              </select>
+            </div>
+          </div>
           <div class="form-group">
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
@@ -52,6 +59,9 @@
     }
     var req = new XMLHttpRequest();
     var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURI($("#ed_long_url").val())+"&unlistedurl="+$("#ed_unlisted_url").prop("checked");
+    if(isAdmin()){
+      connection += "&owner="+$("#owner").val();
+    }
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200){
@@ -70,6 +80,29 @@
   }
   $(document).ready(function(){
 	   disableElementsEdit(false);
+     if(!isAdmin()){
+       $("#owner_div").hide();
+     }else{
+       var reqUsers = new XMLHttpRequest();
+       var connectionUsers = "/api/getusers.php?token="+token;
+       reqUsers.open("GET", connectionUsers, true);
+       reqUsers.onreadystatechange = function () {
+         if(reqUsers.readyState == 4 && reqUsers.status == 200){
+           var responseUsers = JSON.parse(reqUsers.responseText);
+           if(responseUsers.success) {
+             $.each(responseUsers.items, function() {
+                 $("#owner").append(new Option(this.name, this.id));
+             });
+             /*for(var i = 0; i < responseUsers.items.length; i++){
+               $("#owner").append("<option/>").val(responseUsers.items[i].id).text(responseUsers.items[i].name);
+             }*/
+           }else{
+             alert("There was an error fetching the users list");
+           }
+         }
+       };
+       reqUsers.send();
+     }
   });
   function disableElementsEdit(value){
   	$("#ed_btn_cross").attr("disabled", value);

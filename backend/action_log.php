@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 	</head>
 	<body>
@@ -60,9 +60,9 @@
 					?>
 				</tbody>
 			</table>
-			<script type="text/javascript" src="/js/jquery.js">
+			<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js">
 			</script>
-			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js">
 			</script>
 

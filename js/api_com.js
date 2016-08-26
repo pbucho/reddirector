@@ -25,3 +25,6 @@ function setConfirmFields(short_url) {
 	$("#conf_short_url").val(short_url);
 	$("#conf_show_url").html(short_url);
 }
+function isAdmin() {
+  return $("#is_admin").val() == "true" ? true : false;
+}

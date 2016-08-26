@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-		<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
 	</head>
 	<body>
@@ -91,8 +91,8 @@
 			<br/><br/>
 			<button class="btn btn-primary" onclick="terminateOtherSessions()">Terminate all other sessions</button>
 			&nbsp;&nbsp;<i id="spinner" class="fa fa-circle-o-notch fa-spin"></i>
-			<script type="text/javascript" src="/js/jquery.js"></script>
-			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+			<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+			<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			<script type="text/javascript" src="/js/api_com.js"></script>
 			<script type="text/javascript">
 				$(document).ready(function() {
