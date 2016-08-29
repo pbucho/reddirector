@@ -10,7 +10,7 @@
 	$session_token = cookies_has_session();
 	$roles_is_admin = roles_is_admin(cache_get_cached_user($session_token));
 ?>
-<nav class="navbar navbar-inverse">
+<!--<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/list.php"><?php echo $SITE_NAME; ?></a>
@@ -41,4 +41,33 @@
       ?>
     </ul>
   </div>
+</nav>-->
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar_collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#"><?php echo $SITE_NAME; ?></a>
+	</div>
+	<div class="navbar-collapse collapse" id="navbar_collapse">
+		<ul class="nav navbar-nav">
+			<li><a href="/list.php">List</a></li>
+			<?php
+				if($session_token != false){
+					echo "<li><a href='/backend/my_urls.php'>My URLs</a></li>";
+				}
+				if($roles_is_admin){
+					echo "<li><a href='/backend/access_log.php'>Access log</a></li>";
+					echo "<li><a href='/backend/action_log.php'>Action log</a></li>";
+				}
+			?>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<p>Signed in as <a href="#" class="navbar-link">Thomas</a></p>
+		</ul>
+	</div>
 </nav>

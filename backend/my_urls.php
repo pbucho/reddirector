@@ -75,7 +75,6 @@
 							{ "targets": 3, "data": "views" },
 							{ "targets": 4,
 						 		"data": function (row){
-									console.log(row.unlistedurl);
 									if(row.unlistedurl){
 										return "<span style='color: green'><i class='fa fa-check'></i></span>";
 									}else{
