@@ -65,11 +65,22 @@
 							},
 							"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 							"order": [[ 2, "desc" ]],
-							"columns": [
+							/*"columns": [
 								{ data: "string" },
 								{ data: "longurl" },
 								{ data: "dateadded" },
 								{ data: "views" }
+							]*/
+							"columnDefs": [
+								{ "targets": 0, "data": "string"},
+								{ "targets": 1,
+									"data": function (row) {
+										var longurl = row.longurl.startsWith("http://") || row.longurl.startsWith("https://") ? row.longurl : "http://" + row.longurl;
+										return "<a href='"+longurl+"' target='_blank'>"+row.longurl+"</a>";
+									}
+								},
+								{ "targets": 2, "data": "dateadded" },
+								{ "targets": 3, "data": "views" }
 							]
 						});
 					}else{
