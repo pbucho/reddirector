@@ -1,6 +1,6 @@
 Changelog
 =========
-[0.3-SNAPSHOT] 2016-08-18
+[0.3-SNAPSHOT] 2016-09-02
 -------------------------
 ### Added
 - User name caching

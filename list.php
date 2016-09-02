@@ -82,7 +82,12 @@
 							"order": [[ 2, "desc" ]],
 							"columnDefs": [
 								{ "targets": 0, "data": "string" },
-								{ "targets": 1, "data": "longurl" },
+								{ "targets": 1,
+									"data": function (row) {
+										var longurl = row.longurl.startsWith("http://") || row.longurl.startsWith("https://") ? row.longurl : "http://" + row.longurl;
+										return "<a href='"+longurl+"' target='_blank'>"+row.longurl+"</a>";
+									}
+								},
 								{ "targets": 2, "data": "dateadded" },
 								{ "targets": 3, "data": "views" },
 								{ "targets": 4, "data": "owner" },
