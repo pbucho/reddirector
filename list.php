@@ -65,12 +65,6 @@
 							},
 							"lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
 							"order": [[ 2, "desc" ]],
-							/*"columns": [
-								{ data: "string" },
-								{ data: "longurl" },
-								{ data: "dateadded" },
-								{ data: "views" }
-							]*/
 							"columnDefs": [
 								{ "targets": 0, "data": "string"},
 								{ "targets": 1,

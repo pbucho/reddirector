@@ -85,39 +85,10 @@
 					<abbr title="This feature is not yet implemented"><input type="submit" class="btn btn-primary" value="Change password" disabled="true"></abbr>
 				</form>
 			</div>
-			<br/>
-			<h2>Login management</h2>
-			You have <?php echo $active_sessions; ?> active session<?php echo ($active_sessions == 1 ? "" : "s"); ?>.
-			<br/><br/>
-			<button class="btn btn-primary" onclick="terminateOtherSessions()">Terminate all other sessions</button>
-			&nbsp;&nbsp;<i id="spinner" class="fa fa-circle-o-notch fa-spin"></i>
 			<script type="text/javascript" src="/js/jquery.js"></script>
 			<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="/js/api_com.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$("#spinner").hide();
-				});
-				var token = getToken();
-				function terminateOtherSessions() {
-					var req = new XMLHttpRequest();
-					var connection = "/api/terminatesessions.php?token="+token;
-					req.open("GET", connection, true);
-					req.onreadystatechange = function(){
-						if(req.readyState == 4 && req.status == 200){
-							var response = req.responseText;
-							response = JSON.parse(response);
-							if(response['success']){
-								location.reload();
-							}else{
-								alert("Could not terminate sessions: "+response['reason']);
-							}
-						}
-					};
-					req.send();
-				}
-			</script>
 		</div>
+		<br/>
 		<?php
 			include("../resources/footer.php");
 		?>
