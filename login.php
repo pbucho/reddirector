@@ -2,6 +2,7 @@
 	include_once("includes/base.php");
 	include_once("includes/tokens.php");
 	include_once("includes/cookies.php");
+	include_once("includes/logger.php");
 
 	$login_failed = false;
 	$session_token = cookies_has_session();
@@ -35,9 +36,8 @@
 			$login_failed = true;
 		}else{
 			$token_array = tokens_generate_and_persist_token($cuser);
-
 			cookies_create_or_update_cookie("token", $token_array['token'], $token_array['expiry']);
-
+			logger_log_user_login($token_array['token']);
 			header("Location: /backend/".$next_page.".php");
 		}
 	}
