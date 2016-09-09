@@ -9,8 +9,8 @@ function getToken() {
     if(thisCookie.length < 1){
       continue;
     }
-    if(thisCookie[0] == "token"){
-      return thisCookie[1];
+    if(thisCookie[0].trim() == "token"){
+      return thisCookie[1].trim();
     }
   }
   return null;
