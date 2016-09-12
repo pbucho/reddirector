@@ -54,9 +54,10 @@
 			<script type="text/javascript" src="/js/api_com.js"></script>
 			<script type="text/javascript">
 				var token = getToken();
+				var isAdmin = $("#is_admin").val() == "true" ? true : false;
 				var table;
 				$(document).ready(function(){
-					if(!isAdmin()){
+					if(!isAdmin){
 						table = $("#link_table").DataTable( {
 							"ajax": {
 								"url": token == null ? '/api/listall.php' : '/api/listall.php?token='+token,
