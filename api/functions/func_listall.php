@@ -40,7 +40,7 @@
 						continue;
 					}
 				}
-				$item_response = array('string' => $item['short_url'], 'longurl' => $item['long_url'], 'dateadded' => (new DateTime($item['added']))->format(DateTime::ISO8601), 'views' => (int) $item['views']);
+				$item_response = array('string' => $item['short_url'], 'longurl' => $item['long_url'], 'dateadded' => $item['added'], 'views' => (int) $item['views']);
 				if(!is_null($token) && json_decode(api_authenticate($token), true)['success']){
 					if($isadmin){
 						$item_response['owner'] = $item['owner'];
