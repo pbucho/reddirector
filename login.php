@@ -51,7 +51,7 @@
 		<link rel="stylesheet" href="/css/backwards.css">
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 		<link href="/css/signin.css" rel="stylesheet">
 
