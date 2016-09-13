@@ -20,8 +20,7 @@
 		$sqlReq .= "'0')";
 		$conn->query($sqlReq);
 		$conn = null;
-		$image404 = base_get_404_image();
-		header("Location: $image404");
+		header("Location: /list.php");
 		die;
 	}
 

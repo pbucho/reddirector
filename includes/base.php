@@ -40,25 +40,7 @@
 
 	// from http://stackoverflow.com/a/10473026
 	function base_starts_with($haystack, $needle) {
-  	return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
-	}
-
-	function base_get_404_image() {
-		$sqlMaxImg = "SELECT max(id) AS max FROM 404errors";
-
-		$conn = base_get_connection();
-		$result = $conn->query($sqlMaxImg);
-
-		$rand = rand(1, base_fetch_lazy($result)['max']);
-
-		$sqlGetImg = "SELECT url FROM 404errors WHERE id = $rand";
-		$sqlUpdViews = "UPDATE 404errors SET views = views + 1 WHERE id = $rand";
-
-		$result = $conn->query($sqlGetImg);
-		$conn->query($sqlUpdViews);
-		$conn = null;
-
-		return base_fetch_lazy($result)['url'];
+		return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
 	}
 
 	function base_fetch_lazy($result){
