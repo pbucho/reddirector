@@ -55,7 +55,7 @@
     if(token != null){
       connection += "token="+token+"&";
     }
-    connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURI($("#add_long_url").val())+"&unlistedurl="+$("#add_unlisted_url").prop("checked");
+    connection += "shorturl="+$("#add_short_url").val()+"&longurl="+encodeURIComponent($("#add_long_url").val())+"&unlistedurl="+$("#add_unlisted_url").prop("checked");
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200) {

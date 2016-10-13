@@ -51,7 +51,7 @@
       return;
     }
     var req = new XMLHttpRequest();
-    var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURI($("#ed_long_url").val())+"&unlistedurl="+$("#ed_unlisted_url").prop("checked");
+    var connection = "/api/modify.php?token="+token+"&shorturl="+$("#ed_short_url").val()+"&longurl="+encodeURIComponent($("#ed_long_url").val())+"&unlistedurl="+$("#ed_unlisted_url").prop("checked");
     req.open("GET", connection, true);
     req.onreadystatechange = function() {
       if(req.readyState == 4 && req.status == 200){
